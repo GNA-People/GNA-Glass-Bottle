@@ -1810,9 +1810,9 @@ function App() {
       ref: vpRef,
       onPointerDown: onPanStart,
       onWheel: onWheel,
-      className: "relative overflow-hidden bg-cyan-200",
+      className: "relative overflow-hidden bg-cyan-200 flex-1",
       style: {
-        height: "70vh",
+        minHeight: "60vh",
         cursor: drag.current.on ? "grabbing" : "grab",
         touchAction: "none"
       },
