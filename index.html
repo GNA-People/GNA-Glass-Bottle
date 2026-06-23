@@ -6,7 +6,6 @@
 <title>GNA 유리병 편지</title>
 <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/@babel/standalone@7.25.6/babel.min.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
   html, body, #root { height: 100%; margin: 0; }
@@ -15,79 +14,413 @@
 </head>
 <body>
 <div id="root"></div>
-<script type="text/babel" data-presets="react" data-type="script">
-const { useState, useEffect, useRef } = React;
+<script>
+(function start(){
+  if (!window.React || !window.ReactDOM) { setTimeout(start, 30); return; }
+  var React = window.React;
+  var ReactDOM = window.ReactDOM;
+
+const _Fragment = React.Fragment;
+const _jsx = (type, props, key) => {
+  const { children, ...rest } = props || {};
+  return React.createElement(type, key !== undefined ? { ...rest, key } : rest, children);
+};
+const _jsxs = _jsx;
+const {
+  useState,
+  useEffect,
+  useRef
+} = React;
 
 // 간단 아이콘 (lucide 대체용 인라인 SVG)
-function Icon({ d, size = 20, sw = 2 }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round">
-      {d}
-    </svg>
-  );
+function Icon({
+  d,
+  size = 20,
+  sw = 2
+}) {
+  return /*#__PURE__*/_jsx("svg", {
+    width: size,
+    height: size,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: sw,
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    children: d
+  });
 }
-const X = (p) => <Icon size={p.size} d={<><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></>} />;
-const Plus = (p) => <Icon size={p.size} sw={p.strokeWidth || 2} d={<><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></>} />;
-const Send = (p) => <Icon size={p.size} d={<><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></>} />;
-const Sparkles = (p) => <Icon size={p.size} d={<path d="M12 3l1.9 5.8L19 11l-5.1 2.2L12 19l-1.9-5.8L5 11l5.1-2.2L12 3z"/>} />;
-const Pencil = (p) => <Icon size={p.size} d={<><path d="M17 3a2.8 2.8 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></>} />;
-const Trash2 = (p) => <Icon size={p.size} d={<><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></>} />;
-const Compass = (p) => <Icon size={p.size} d={<><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></>} />;
-const Volume2 = (p) => <Icon size={p.size} d={<><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></>} />;
-const VolumeX = (p) => <Icon size={p.size} d={<><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></>} />;
-const ZoomIn = (p) => <Icon size={p.size} d={<><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></>} />;
-const ZoomOut = (p) => <Icon size={p.size} d={<><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></>} />;
-const RefreshCw = (p) => <Icon size={p.size} d={<><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></>} />;
-
+const X = p => /*#__PURE__*/_jsx(Icon, {
+  size: p.size,
+  d: /*#__PURE__*/_jsxs(_Fragment, {
+    children: [/*#__PURE__*/_jsx("line", {
+      x1: "18",
+      y1: "6",
+      x2: "6",
+      y2: "18"
+    }), /*#__PURE__*/_jsx("line", {
+      x1: "6",
+      y1: "6",
+      x2: "18",
+      y2: "18"
+    })]
+  })
+});
+const Plus = p => /*#__PURE__*/_jsx(Icon, {
+  size: p.size,
+  sw: p.strokeWidth || 2,
+  d: /*#__PURE__*/_jsxs(_Fragment, {
+    children: [/*#__PURE__*/_jsx("line", {
+      x1: "12",
+      y1: "5",
+      x2: "12",
+      y2: "19"
+    }), /*#__PURE__*/_jsx("line", {
+      x1: "5",
+      y1: "12",
+      x2: "19",
+      y2: "12"
+    })]
+  })
+});
+const Send = p => /*#__PURE__*/_jsx(Icon, {
+  size: p.size,
+  d: /*#__PURE__*/_jsxs(_Fragment, {
+    children: [/*#__PURE__*/_jsx("line", {
+      x1: "22",
+      y1: "2",
+      x2: "11",
+      y2: "13"
+    }), /*#__PURE__*/_jsx("polygon", {
+      points: "22 2 15 22 11 13 2 9 22 2"
+    })]
+  })
+});
+const Sparkles = p => /*#__PURE__*/_jsx(Icon, {
+  size: p.size,
+  d: /*#__PURE__*/_jsx("path", {
+    d: "M12 3l1.9 5.8L19 11l-5.1 2.2L12 19l-1.9-5.8L5 11l5.1-2.2L12 3z"
+  })
+});
+const Pencil = p => /*#__PURE__*/_jsx(Icon, {
+  size: p.size,
+  d: /*#__PURE__*/_jsx(_Fragment, {
+    children: /*#__PURE__*/_jsx("path", {
+      d: "M17 3a2.8 2.8 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"
+    })
+  })
+});
+const Trash2 = p => /*#__PURE__*/_jsx(Icon, {
+  size: p.size,
+  d: /*#__PURE__*/_jsxs(_Fragment, {
+    children: [/*#__PURE__*/_jsx("polyline", {
+      points: "3 6 5 6 21 6"
+    }), /*#__PURE__*/_jsx("path", {
+      d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+    })]
+  })
+});
+const Compass = p => /*#__PURE__*/_jsx(Icon, {
+  size: p.size,
+  d: /*#__PURE__*/_jsxs(_Fragment, {
+    children: [/*#__PURE__*/_jsx("circle", {
+      cx: "12",
+      cy: "12",
+      r: "10"
+    }), /*#__PURE__*/_jsx("polygon", {
+      points: "16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"
+    })]
+  })
+});
+const Volume2 = p => /*#__PURE__*/_jsx(Icon, {
+  size: p.size,
+  d: /*#__PURE__*/_jsxs(_Fragment, {
+    children: [/*#__PURE__*/_jsx("polygon", {
+      points: "11 5 6 9 2 9 2 15 6 15 11 19 11 5"
+    }), /*#__PURE__*/_jsx("path", {
+      d: "M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"
+    })]
+  })
+});
+const VolumeX = p => /*#__PURE__*/_jsx(Icon, {
+  size: p.size,
+  d: /*#__PURE__*/_jsxs(_Fragment, {
+    children: [/*#__PURE__*/_jsx("polygon", {
+      points: "11 5 6 9 2 9 2 15 6 15 11 19 11 5"
+    }), /*#__PURE__*/_jsx("line", {
+      x1: "23",
+      y1: "9",
+      x2: "17",
+      y2: "15"
+    }), /*#__PURE__*/_jsx("line", {
+      x1: "17",
+      y1: "9",
+      x2: "23",
+      y2: "15"
+    })]
+  })
+});
+const ZoomIn = p => /*#__PURE__*/_jsx(Icon, {
+  size: p.size,
+  d: /*#__PURE__*/_jsxs(_Fragment, {
+    children: [/*#__PURE__*/_jsx("circle", {
+      cx: "11",
+      cy: "11",
+      r: "8"
+    }), /*#__PURE__*/_jsx("line", {
+      x1: "21",
+      y1: "21",
+      x2: "16.65",
+      y2: "16.65"
+    }), /*#__PURE__*/_jsx("line", {
+      x1: "11",
+      y1: "8",
+      x2: "11",
+      y2: "14"
+    }), /*#__PURE__*/_jsx("line", {
+      x1: "8",
+      y1: "11",
+      x2: "14",
+      y2: "11"
+    })]
+  })
+});
+const ZoomOut = p => /*#__PURE__*/_jsx(Icon, {
+  size: p.size,
+  d: /*#__PURE__*/_jsxs(_Fragment, {
+    children: [/*#__PURE__*/_jsx("circle", {
+      cx: "11",
+      cy: "11",
+      r: "8"
+    }), /*#__PURE__*/_jsx("line", {
+      x1: "21",
+      y1: "21",
+      x2: "16.65",
+      y2: "16.65"
+    }), /*#__PURE__*/_jsx("line", {
+      x1: "8",
+      y1: "11",
+      x2: "14",
+      y2: "11"
+    })]
+  })
+});
+const RefreshCw = p => /*#__PURE__*/_jsx(Icon, {
+  size: p.size,
+  d: /*#__PURE__*/_jsxs(_Fragment, {
+    children: [/*#__PURE__*/_jsx("polyline", {
+      points: "23 4 23 10 17 10"
+    }), /*#__PURE__*/_jsx("polyline", {
+      points: "1 20 1 14 7 14"
+    }), /*#__PURE__*/_jsx("path", {
+      d: "M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"
+    })]
+  })
+});
 const WORLD_W = 2000;
 const WORLD_H = 1300;
 const SEA_H = 250;
-
-const REACTIONS = [
-  { key: "heart", emoji: "❤️" },
-  { key: "fire", emoji: "🔥" },
-  { key: "up", emoji: "👍" },
-];
-
-const BOTTLE_COLORS = [
-  { name: "민트", body: "#8fd6c4", dark: "#5fb8a3" },
-  { name: "하늘", body: "#a8d8ea", dark: "#79b8d6" },
-  { name: "라벤더", body: "#c5b8e0", dark: "#a08fd0" },
-  { name: "코랄", body: "#f5c6b8", dark: "#e0a08f" },
-  { name: "라임", body: "#bfe0a0", dark: "#9bc472" },
-  { name: "허니", body: "#f5d9a0", dark: "#e0bc72" },
-];
-
-const CATEGORIES = [
-  { key: "content", label: "콘텐츠", icon: "🎬", color: "#5fb8a3", colorIndex: 0 },
-  { key: "tip", label: "GNA 꿀팁", icon: "💡", color: "#79b8d6", colorIndex: 1 },
-  { key: "food", label: "서초구 맛집", icon: "🍜", color: "#e0a08f", colorIndex: 3 },
-  { key: "game", label: "게임", icon: "🎮", color: "#a08fd0", colorIndex: 2 },
-  { key: "etc", label: "기타", icon: "✨", color: "#e0bc72", colorIndex: 5 },
-];
+const REACTIONS = [{
+  key: "heart",
+  emoji: "❤️"
+}, {
+  key: "fire",
+  emoji: "🔥"
+}, {
+  key: "up",
+  emoji: "👍"
+}];
+const BOTTLE_COLORS = [{
+  name: "민트",
+  body: "#8fd6c4",
+  dark: "#5fb8a3"
+}, {
+  name: "하늘",
+  body: "#a8d8ea",
+  dark: "#79b8d6"
+}, {
+  name: "라벤더",
+  body: "#c5b8e0",
+  dark: "#a08fd0"
+}, {
+  name: "코랄",
+  body: "#f5c6b8",
+  dark: "#e0a08f"
+}, {
+  name: "라임",
+  body: "#bfe0a0",
+  dark: "#9bc472"
+}, {
+  name: "허니",
+  body: "#f5d9a0",
+  dark: "#e0bc72"
+}];
+const CATEGORIES = [{
+  key: "content",
+  label: "콘텐츠",
+  icon: "🎬",
+  color: "#5fb8a3",
+  colorIndex: 0
+}, {
+  key: "tip",
+  label: "GNA 꿀팁",
+  icon: "💡",
+  color: "#79b8d6",
+  colorIndex: 1
+}, {
+  key: "food",
+  label: "서초구 맛집",
+  icon: "🍜",
+  color: "#e0a08f",
+  colorIndex: 3
+}, {
+  key: "game",
+  label: "게임",
+  icon: "🎮",
+  color: "#a08fd0",
+  colorIndex: 2
+}, {
+  key: "etc",
+  label: "기타",
+  icon: "✨",
+  color: "#e0bc72",
+  colorIndex: 5
+}];
 function catColorIndex(key) {
   if (key === "none" || !key) return 4;
-  const c = CATEGORIES.find((x) => x.key === key);
+  const c = CATEGORIES.find(x => x.key === key);
   return c ? c.colorIndex : 4;
 }
-function catOf(key) { return CATEGORIES.find((c) => c.key === key); }
-
-const DECOR_TYPES = [
-  { e: "🌴", s: 56 }, { e: "🌴", s: 52 }, { e: "🌴", s: 50 }, { e: "🌴", s: 46 },
-  { e: "🌺", s: 30 }, { e: "🌸", s: 26 }, { e: "🌼", s: 26 },
-  { e: "⛱️", s: 48 }, { e: "☂️", s: 40 }, { e: "🏖️", s: 44 },
-  { e: "🏐", s: 30 }, { e: "🪁", s: 36 }, { e: "🪣", s: 28 },
-  { e: "🐚", s: 28 }, { e: "🐚", s: 24 }, { e: "🐚", s: 22 },
-  { e: "⭐", s: 26 }, { e: "🌟", s: 22 },
-  { e: "🦀", s: 30 }, { e: "🦞", s: 30 }, { e: "🐢", s: 36 },
-  { e: "🏝️", s: 44 }, { e: "⚓", s: 32 }, { e: "🦩", s: 38 }, { e: "🍹", s: 30 }, { e: "🪨", s: 30 },
-  { e: "🐠", s: 28, water: true }, { e: "🐟", s: 26, water: true }, { e: "🐡", s: 26, water: true },
-  { e: "🪸", s: 30, water: true }, { e: "🪸", s: 26, water: true },
-  { e: "⛵", s: 40, water: true }, { e: "🚤", s: 34, water: true },
-  { e: "🐬", s: 32, water: true }, { e: "🐳", s: 38, water: true },
-  { e: "🦑", s: 30, water: true }, { e: "🐙", s: 30, water: true }, { e: "🦭", s: 32, water: true },
-];
-
+function catOf(key) {
+  return CATEGORIES.find(c => c.key === key);
+}
+const DECOR_TYPES = [{
+  e: "🌴",
+  s: 56
+}, {
+  e: "🌴",
+  s: 52
+}, {
+  e: "🌴",
+  s: 50
+}, {
+  e: "🌴",
+  s: 46
+}, {
+  e: "🌺",
+  s: 30
+}, {
+  e: "🌸",
+  s: 26
+}, {
+  e: "🌼",
+  s: 26
+}, {
+  e: "⛱️",
+  s: 48
+}, {
+  e: "☂️",
+  s: 40
+}, {
+  e: "🏖️",
+  s: 44
+}, {
+  e: "🏐",
+  s: 30
+}, {
+  e: "🪁",
+  s: 36
+}, {
+  e: "🪣",
+  s: 28
+}, {
+  e: "🐚",
+  s: 28
+}, {
+  e: "🐚",
+  s: 24
+}, {
+  e: "🐚",
+  s: 22
+}, {
+  e: "⭐",
+  s: 26
+}, {
+  e: "🌟",
+  s: 22
+}, {
+  e: "🦀",
+  s: 30
+}, {
+  e: "🦞",
+  s: 30
+}, {
+  e: "🐢",
+  s: 36
+}, {
+  e: "🏝️",
+  s: 44
+}, {
+  e: "⚓",
+  s: 32
+}, {
+  e: "🦩",
+  s: 38
+}, {
+  e: "🍹",
+  s: 30
+}, {
+  e: "🪨",
+  s: 30
+}, {
+  e: "🐠",
+  s: 28,
+  water: true
+}, {
+  e: "🐟",
+  s: 26,
+  water: true
+}, {
+  e: "🐡",
+  s: 26,
+  water: true
+}, {
+  e: "🪸",
+  s: 30,
+  water: true
+}, {
+  e: "🪸",
+  s: 26,
+  water: true
+}, {
+  e: "⛵",
+  s: 40,
+  water: true
+}, {
+  e: "🚤",
+  s: 34,
+  water: true
+}, {
+  e: "🐬",
+  s: 32,
+  water: true
+}, {
+  e: "🐳",
+  s: 38,
+  water: true
+}, {
+  e: "🦑",
+  s: 30,
+  water: true
+}, {
+  e: "🐙",
+  s: 30,
+  water: true
+}, {
+  e: "🦭",
+  s: 32,
+  water: true
+}];
 const SWAY = new Set(["🌴", "🪁", "🌺", "🌸", "🌼", "🦩", "☂️", "⛱️"]);
 const FLOATY = new Set(["🐠", "🐟", "🐡", "🪸", "⛵", "🚤", "🐬", "🐳", "🦑", "🐙", "🦭"]);
 function decorAnim(e) {
@@ -95,47 +428,131 @@ function decorAnim(e) {
   if (FLOATY.has(e)) return "floaty";
   return null;
 }
-
-const ANIM_PRESETS = [
-  {
-    label: "통통", cork: "corkbounce", dur: 0.85,
-    sparkles: [{ e: "✨", end: "translate(-55px,-70px) scale(1.1)" }, { e: "⭐", end: "translate(55px,-60px) scale(1.1)" }, { e: "💫", end: "translate(0px,-90px) scale(1)" }],
-    droplets: [{ end: "translate(-60px,50px) scale(1)", d: 0 }, { end: "translate(60px,55px) scale(1)", d: 0.05 }, { end: "translate(-30px,70px) scale(0.8)", d: 0.1 }, { end: "translate(35px,75px) scale(0.8)", d: 0.08 }, { end: "translate(0px,80px) scale(0.9)", d: 0.12 }],
-  },
-  {
-    label: "반짝", cork: "corkpop", dur: 0.65,
-    sparkles: [{ e: "✨", end: "translate(-65px,-65px) scale(1.2)" }, { e: "⭐", end: "translate(65px,-55px) scale(1.2)" }, { e: "💫", end: "translate(-50px,30px) scale(1)" }, { e: "✨", end: "translate(55px,25px) scale(1)" }, { e: "🌟", end: "translate(-15px,-85px) scale(1.1)" }, { e: "⭐", end: "translate(20px,-75px) scale(1)" }],
-    droplets: [{ end: "translate(-45px,45px) scale(0.8)", d: 0 }, { end: "translate(45px,50px) scale(0.8)", d: 0.06 }],
-  },
-  {
-    label: "물방울", cork: "corkspin", dur: 0.7,
-    sparkles: [{ e: "✨", end: "translate(-50px,-60px) scale(1)" }, { e: "💧", end: "translate(50px,-50px) scale(1.1)" }],
-    droplets: [{ end: "translate(-70px,40px) scale(1)", d: 0 }, { end: "translate(70px,45px) scale(1)", d: 0.04 }, { end: "translate(-45px,70px) scale(0.9)", d: 0.08 }, { end: "translate(50px,72px) scale(0.9)", d: 0.06 }, { end: "translate(-15px,85px) scale(0.85)", d: 0.12 }, { end: "translate(20px,82px) scale(0.85)", d: 0.1 }, { end: "translate(0px,95px) scale(1)", d: 0.14 }],
-  },
-];
-
+const ANIM_PRESETS = [{
+  label: "통통",
+  cork: "corkbounce",
+  dur: 0.85,
+  sparkles: [{
+    e: "✨",
+    end: "translate(-55px,-70px) scale(1.1)"
+  }, {
+    e: "⭐",
+    end: "translate(55px,-60px) scale(1.1)"
+  }, {
+    e: "💫",
+    end: "translate(0px,-90px) scale(1)"
+  }],
+  droplets: [{
+    end: "translate(-60px,50px) scale(1)",
+    d: 0
+  }, {
+    end: "translate(60px,55px) scale(1)",
+    d: 0.05
+  }, {
+    end: "translate(-30px,70px) scale(0.8)",
+    d: 0.1
+  }, {
+    end: "translate(35px,75px) scale(0.8)",
+    d: 0.08
+  }, {
+    end: "translate(0px,80px) scale(0.9)",
+    d: 0.12
+  }]
+}, {
+  label: "반짝",
+  cork: "corkpop",
+  dur: 0.65,
+  sparkles: [{
+    e: "✨",
+    end: "translate(-65px,-65px) scale(1.2)"
+  }, {
+    e: "⭐",
+    end: "translate(65px,-55px) scale(1.2)"
+  }, {
+    e: "💫",
+    end: "translate(-50px,30px) scale(1)"
+  }, {
+    e: "✨",
+    end: "translate(55px,25px) scale(1)"
+  }, {
+    e: "🌟",
+    end: "translate(-15px,-85px) scale(1.1)"
+  }, {
+    e: "⭐",
+    end: "translate(20px,-75px) scale(1)"
+  }],
+  droplets: [{
+    end: "translate(-45px,45px) scale(0.8)",
+    d: 0
+  }, {
+    end: "translate(45px,50px) scale(0.8)",
+    d: 0.06
+  }]
+}, {
+  label: "물방울",
+  cork: "corkspin",
+  dur: 0.7,
+  sparkles: [{
+    e: "✨",
+    end: "translate(-50px,-60px) scale(1)"
+  }, {
+    e: "💧",
+    end: "translate(50px,-50px) scale(1.1)"
+  }],
+  droplets: [{
+    end: "translate(-70px,40px) scale(1)",
+    d: 0
+  }, {
+    end: "translate(70px,45px) scale(1)",
+    d: 0.04
+  }, {
+    end: "translate(-45px,70px) scale(0.9)",
+    d: 0.08
+  }, {
+    end: "translate(50px,72px) scale(0.9)",
+    d: 0.06
+  }, {
+    end: "translate(-15px,85px) scale(0.85)",
+    d: 0.12
+  }, {
+    end: "translate(20px,82px) scale(0.85)",
+    d: 0.1
+  }, {
+    end: "translate(0px,95px) scale(1)",
+    d: 0.14
+  }]
+}];
 function hashId(id) {
   let h = 0;
-  for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) >>> 0;
+  for (let i = 0; i < id.length; i++) h = h * 31 + id.charCodeAt(i) >>> 0;
   return h;
 }
 function getAnim(b) {
   const variant = b.anim != null ? b.anim : hashId(b.id) % ANIM_PRESETS.length;
   const speed = b.speed || 1;
   const base = ANIM_PRESETS[variant];
-  return { ...base, dur: +(base.dur * speed).toFixed(2) };
+  return {
+    ...base,
+    dur: +(base.dur * speed).toFixed(2)
+  };
 }
 function getPos(b) {
-  if (b.x != null && b.y != null) return { x: b.x, y: b.y };
+  if (b.x != null && b.y != null) return {
+    x: b.x,
+    y: b.y
+  };
   const h = hashId(b.id);
-  return { x: 160 + (h % (WORLD_W - 320)), y: 300 + (Math.floor(h / 7) % (WORLD_H - 460)) };
+  return {
+    x: 160 + h % (WORLD_W - 320),
+    y: 300 + Math.floor(h / 7) % (WORLD_H - 460)
+  };
 }
-
 function placeDecor(bottles) {
   const bpos = bottles.map(getPos);
   const placed = [];
   function ok(x, y, s) {
-    const padX = s / 2 + 74, padY = s / 2 + 108;
+    const padX = s / 2 + 74,
+      padY = s / 2 + 108;
     for (const b of bpos) if (Math.abs(x - b.x) < padX && Math.abs(y - b.y) < padY) return false;
     for (const d of placed) {
       const gap = (s + d.s) / 2 + 32;
@@ -148,14 +565,19 @@ function placeDecor(bottles) {
       const x = item.water ? 90 + Math.random() * (WORLD_W - 180) : 110 + Math.random() * (WORLD_W - 220);
       const y = item.water ? 40 + Math.random() * (SEA_H - 90) : SEA_H + 70 + Math.random() * (WORLD_H - SEA_H - 200);
       if (ok(x, y, item.s)) {
-        placed.push({ ...item, x: Math.round(x), y: Math.round(y), delay: +(Math.random() * 2.5).toFixed(2), dur: +(2.6 + Math.random() * 2.4).toFixed(2) });
+        placed.push({
+          ...item,
+          x: Math.round(x),
+          y: Math.round(y),
+          delay: +(Math.random() * 2.5).toFixed(2),
+          dur: +(2.6 + Math.random() * 2.4).toFixed(2)
+        });
         break;
       }
     }
   }
   return placed;
 }
-
 function generateFootprints() {
   const fps = [];
   const trails = 4;
@@ -171,85 +593,369 @@ function generateFootprints() {
       const side = i % 2 === 0 ? 1 : -1;
       const ox = Math.cos(ang + Math.PI / 2) * 9 * side;
       const oy = Math.sin(ang + Math.PI / 2) * 9 * side;
-      fps.push({ x: Math.round(px + ox), y: Math.round(py + oy), a: Math.round((ang * 180) / Math.PI) });
+      fps.push({
+        x: Math.round(px + ox),
+        y: Math.round(py + oy),
+        a: Math.round(ang * 180 / Math.PI)
+      });
     }
   }
   return fps;
 }
-
-function Bottle({ color, scale = 1, showCork = true }) {
-  return (
-    <svg viewBox="0 0 70 130" width={70 * scale} height={130 * scale} className="drop-shadow-md">
-      <defs>
-        <linearGradient id={`g-${color.body}`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor={color.body} stopOpacity="0.85" />
-          <stop offset="100%" stopColor={color.dark} stopOpacity="0.9" />
-        </linearGradient>
-      </defs>
-      {showCork && (<><rect x="27" y="4" width="16" height="14" rx="4" fill="#c9a06a" /><rect x="27" y="4" width="16" height="5" rx="2.5" fill="#d9b482" /></>)}
-      <rect x="29" y="16" width="12" height="14" fill={`url(#g-${color.body})`} stroke={color.dark} strokeWidth="1" />
-      <path d="M24 30 Q18 38 18 56 L18 108 Q18 124 35 124 Q52 124 52 108 L52 56 Q52 38 46 30 Z" fill={`url(#g-${color.body})`} stroke={color.dark} strokeWidth="1.5" />
-      <rect x="28" y="74" width="14" height="34" rx="3" fill="#fdf6e3" stroke="#e8d9b0" strokeWidth="1" />
-      <line x1="31" y1="80" x2="39" y2="80" stroke="#d4c08a" strokeWidth="1" />
-      <line x1="31" y1="85" x2="39" y2="85" stroke="#d4c08a" strokeWidth="1" />
-      <line x1="31" y1="90" x2="37" y2="90" stroke="#d4c08a" strokeWidth="1" />
-      <ellipse cx="27" cy="60" rx="3" ry="20" fill="#ffffff" opacity="0.35" />
-    </svg>
-  );
+function Bottle({
+  color,
+  scale = 1,
+  showCork = true
+}) {
+  return /*#__PURE__*/_jsxs("svg", {
+    viewBox: "0 0 70 130",
+    width: 70 * scale,
+    height: 130 * scale,
+    className: "drop-shadow-md",
+    children: [/*#__PURE__*/_jsx("defs", {
+      children: /*#__PURE__*/_jsxs("linearGradient", {
+        id: `g-${color.body}`,
+        x1: "0",
+        y1: "0",
+        x2: "1",
+        y2: "1",
+        children: [/*#__PURE__*/_jsx("stop", {
+          offset: "0%",
+          stopColor: color.body,
+          stopOpacity: "0.85"
+        }), /*#__PURE__*/_jsx("stop", {
+          offset: "100%",
+          stopColor: color.dark,
+          stopOpacity: "0.9"
+        })]
+      })
+    }), showCork && /*#__PURE__*/_jsxs(_Fragment, {
+      children: [/*#__PURE__*/_jsx("rect", {
+        x: "27",
+        y: "4",
+        width: "16",
+        height: "14",
+        rx: "4",
+        fill: "#c9a06a"
+      }), /*#__PURE__*/_jsx("rect", {
+        x: "27",
+        y: "4",
+        width: "16",
+        height: "5",
+        rx: "2.5",
+        fill: "#d9b482"
+      })]
+    }), /*#__PURE__*/_jsx("rect", {
+      x: "29",
+      y: "16",
+      width: "12",
+      height: "14",
+      fill: `url(#g-${color.body})`,
+      stroke: color.dark,
+      strokeWidth: "1"
+    }), /*#__PURE__*/_jsx("path", {
+      d: "M24 30 Q18 38 18 56 L18 108 Q18 124 35 124 Q52 124 52 108 L52 56 Q52 38 46 30 Z",
+      fill: `url(#g-${color.body})`,
+      stroke: color.dark,
+      strokeWidth: "1.5"
+    }), /*#__PURE__*/_jsx("rect", {
+      x: "28",
+      y: "74",
+      width: "14",
+      height: "34",
+      rx: "3",
+      fill: "#fdf6e3",
+      stroke: "#e8d9b0",
+      strokeWidth: "1"
+    }), /*#__PURE__*/_jsx("line", {
+      x1: "31",
+      y1: "80",
+      x2: "39",
+      y2: "80",
+      stroke: "#d4c08a",
+      strokeWidth: "1"
+    }), /*#__PURE__*/_jsx("line", {
+      x1: "31",
+      y1: "85",
+      x2: "39",
+      y2: "85",
+      stroke: "#d4c08a",
+      strokeWidth: "1"
+    }), /*#__PURE__*/_jsx("line", {
+      x1: "31",
+      y1: "90",
+      x2: "37",
+      y2: "90",
+      stroke: "#d4c08a",
+      strokeWidth: "1"
+    }), /*#__PURE__*/_jsx("ellipse", {
+      cx: "27",
+      cy: "60",
+      rx: "3",
+      ry: "20",
+      fill: "#ffffff",
+      opacity: "0.35"
+    })]
+  });
 }
-
 function IntroBeach() {
-  const clouds = [
-    { l: "6%", t: "9%", s: 1, d: "26s" },
-    { l: "58%", t: "7%", s: 1.3, d: "34s" },
-    { l: "33%", t: "19%", s: 0.8, d: "30s" },
-    { l: "80%", t: "15%", s: 0.95, d: "40s" },
-  ];
-  const birds = [{ l: "20%", t: "15%" }, { l: "25%", t: "13%" }, { l: "31%", t: "16%" }, { l: "68%", t: "11%" }, { l: "73%", t: "13%" }];
-  return (
-    <div className="absolute inset-0 overflow-hidden">
-      <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom,#3f9fe0 0%,#79c3ec 30%,#bfe6f3 50%,#e3f4f6 60%)" }} />
-      <div className="absolute" style={{ right: "6%", top: "2%", width: 260, height: 260, borderRadius: "9999px", background: "radial-gradient(circle, rgba(255,249,219,0.95), rgba(255,249,219,0) 70%)" }} />
-      {clouds.map((c, i) => (
-        <div key={"c" + i} className="absolute" style={{ left: c.l, top: c.t, transform: `scale(${c.s})`, animation: `drift ${c.d} ease-in-out infinite alternate` }}>
-          <div className="relative" style={{ width: 150, height: 50 }}>
-            <div className="absolute rounded-full bg-white/90" style={{ width: 150, height: 34, top: 14, filter: "blur(1px)" }} />
-            <div className="absolute rounded-full bg-white/90" style={{ width: 62, height: 62, left: 22, top: 2 }} />
-            <div className="absolute rounded-full bg-white" style={{ width: 82, height: 74, left: 58, top: -6 }} />
-            <div className="absolute rounded-full bg-white/85" style={{ width: 56, height: 50, left: 102, top: 8 }} />
-          </div>
-        </div>
-      ))}
-      {birds.map((b, i) => (
-        <svg key={"bird" + i} className="absolute" style={{ left: b.l, top: b.t }} width="16" height="8" viewBox="0 0 16 8">
-          <path d="M1 6 Q4 1 8 5 Q12 1 15 6" stroke="rgba(255,255,255,0.85)" strokeWidth="1.3" fill="none" strokeLinecap="round" />
-        </svg>
-      ))}
-      <div className="absolute" style={{ left: "3%", top: "45%", width: 150, height: 64, background: "#74b08c", borderRadius: "50% 50% 0 0", opacity: 0.8 }} />
-      <div className="absolute" style={{ left: "26%", top: "47%", width: 110, height: 44, background: "#83b994", borderRadius: "50% 50% 0 0", opacity: 0.7 }} />
-      <div className="absolute" style={{ right: "9%", top: "42%", width: 230, height: 96, background: "#5fa07e", borderRadius: "50% 50% 0 0", opacity: 0.9 }} />
-      <div className="absolute left-0 right-0" style={{ top: "48%", height: "17%", background: "linear-gradient(to bottom,#2fa6c6,#7fd2de)" }}>
-        <div className="absolute" style={{ left: "-10%", top: "26%", width: "130%", height: 6, background: "repeating-linear-gradient(90deg, transparent 0 50px, rgba(255,255,255,0.5) 50px 66px, transparent 66px 120px)", animation: "seacrest 6s linear infinite", filter: "blur(0.5px)" }} />
-        <div className="absolute" style={{ left: "-10%", top: "58%", width: "130%", height: 6, background: "repeating-linear-gradient(90deg, transparent 0 70px, rgba(255,255,255,0.45) 70px 84px, transparent 84px 150px)", animation: "seacrest 4.5s linear infinite", filter: "blur(0.5px)" }} />
-      </div>
-      <div className="absolute left-0 right-0 bottom-0" style={{ top: "62%", background: "linear-gradient(to bottom,#f7e2b0,#ecc987)" }} />
-      <svg viewBox="0 0 1200 130" preserveAspectRatio="none" className="absolute left-0 right-0" style={{ top: "55%", width: "100%", height: 170 }}>
-        <defs>
-          <linearGradient id="introshore" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#7fd2de" />
-            <stop offset="100%" stopColor="#bfeaec" />
-          </linearGradient>
-        </defs>
-        <path d="M0,0 L1200,0 L1200,74 C1000,98 800,52 600,76 C400,100 200,54 0,74 Z" fill="url(#introshore)" />
-        <path d="M0,66 C200,44 400,90 600,66 C800,42 1000,90 1200,66 L1200,86 C1000,110 800,54 600,84 C400,110 200,54 0,76 Z" fill="rgba(255,255,255,0.9)" style={{ animation: "washF 4.8s ease-in-out infinite" }} />
-      </svg>
-      {[0, 1, 2, 3, 4, 5].map((i) => (
-        <div key={"ifp" + i} className="absolute rounded-full" style={{ left: `${28 + i * 6.5}%`, top: `${90 - i * 4.5}%`, width: 13 - i, height: 18 - i, background: "rgba(150,110,60,0.2)", transform: `rotate(${i % 2 ? 14 : -14}deg)`, filter: "blur(0.4px)" }} />
-      ))}
-      <div className="absolute" style={{ right: "5%", bottom: "22%", fontSize: 135, transformOrigin: "bottom center", animation: "sway 5s ease-in-out infinite", filter: "drop-shadow(0 8px 6px rgba(0,0,0,0.18))" }}>🌴</div>
-      <div className="absolute" style={{ right: "19%", bottom: "30%", fontSize: 92, transformOrigin: "bottom center", animation: "sway 6s ease-in-out infinite", animationDelay: ".5s", filter: "drop-shadow(0 6px 5px rgba(0,0,0,0.16))" }}>🌴</div>
-    </div>
-  );
+  const clouds = [{
+    l: "6%",
+    t: "9%",
+    s: 1,
+    d: "26s"
+  }, {
+    l: "58%",
+    t: "7%",
+    s: 1.3,
+    d: "34s"
+  }, {
+    l: "33%",
+    t: "19%",
+    s: 0.8,
+    d: "30s"
+  }, {
+    l: "80%",
+    t: "15%",
+    s: 0.95,
+    d: "40s"
+  }];
+  const birds = [{
+    l: "20%",
+    t: "15%"
+  }, {
+    l: "25%",
+    t: "13%"
+  }, {
+    l: "31%",
+    t: "16%"
+  }, {
+    l: "68%",
+    t: "11%"
+  }, {
+    l: "73%",
+    t: "13%"
+  }];
+  return /*#__PURE__*/_jsxs("div", {
+    className: "absolute inset-0 overflow-hidden",
+    children: [/*#__PURE__*/_jsx("div", {
+      className: "absolute inset-0",
+      style: {
+        background: "linear-gradient(to bottom,#3f9fe0 0%,#79c3ec 30%,#bfe6f3 50%,#e3f4f6 60%)"
+      }
+    }), /*#__PURE__*/_jsx("div", {
+      className: "absolute",
+      style: {
+        right: "6%",
+        top: "2%",
+        width: 260,
+        height: 260,
+        borderRadius: "9999px",
+        background: "radial-gradient(circle, rgba(255,249,219,0.95), rgba(255,249,219,0) 70%)"
+      }
+    }), clouds.map((c, i) => /*#__PURE__*/_jsx("div", {
+      className: "absolute",
+      style: {
+        left: c.l,
+        top: c.t,
+        transform: `scale(${c.s})`,
+        animation: `drift ${c.d} ease-in-out infinite alternate`
+      },
+      children: /*#__PURE__*/_jsxs("div", {
+        className: "relative",
+        style: {
+          width: 150,
+          height: 50
+        },
+        children: [/*#__PURE__*/_jsx("div", {
+          className: "absolute rounded-full bg-white/90",
+          style: {
+            width: 150,
+            height: 34,
+            top: 14,
+            filter: "blur(1px)"
+          }
+        }), /*#__PURE__*/_jsx("div", {
+          className: "absolute rounded-full bg-white/90",
+          style: {
+            width: 62,
+            height: 62,
+            left: 22,
+            top: 2
+          }
+        }), /*#__PURE__*/_jsx("div", {
+          className: "absolute rounded-full bg-white",
+          style: {
+            width: 82,
+            height: 74,
+            left: 58,
+            top: -6
+          }
+        }), /*#__PURE__*/_jsx("div", {
+          className: "absolute rounded-full bg-white/85",
+          style: {
+            width: 56,
+            height: 50,
+            left: 102,
+            top: 8
+          }
+        })]
+      })
+    }, "c" + i)), birds.map((b, i) => /*#__PURE__*/_jsx("svg", {
+      className: "absolute",
+      style: {
+        left: b.l,
+        top: b.t
+      },
+      width: "16",
+      height: "8",
+      viewBox: "0 0 16 8",
+      children: /*#__PURE__*/_jsx("path", {
+        d: "M1 6 Q4 1 8 5 Q12 1 15 6",
+        stroke: "rgba(255,255,255,0.85)",
+        strokeWidth: "1.3",
+        fill: "none",
+        strokeLinecap: "round"
+      })
+    }, "bird" + i)), /*#__PURE__*/_jsx("div", {
+      className: "absolute",
+      style: {
+        left: "3%",
+        top: "45%",
+        width: 150,
+        height: 64,
+        background: "#74b08c",
+        borderRadius: "50% 50% 0 0",
+        opacity: 0.8
+      }
+    }), /*#__PURE__*/_jsx("div", {
+      className: "absolute",
+      style: {
+        left: "26%",
+        top: "47%",
+        width: 110,
+        height: 44,
+        background: "#83b994",
+        borderRadius: "50% 50% 0 0",
+        opacity: 0.7
+      }
+    }), /*#__PURE__*/_jsx("div", {
+      className: "absolute",
+      style: {
+        right: "9%",
+        top: "42%",
+        width: 230,
+        height: 96,
+        background: "#5fa07e",
+        borderRadius: "50% 50% 0 0",
+        opacity: 0.9
+      }
+    }), /*#__PURE__*/_jsxs("div", {
+      className: "absolute left-0 right-0",
+      style: {
+        top: "48%",
+        height: "17%",
+        background: "linear-gradient(to bottom,#2fa6c6,#7fd2de)"
+      },
+      children: [/*#__PURE__*/_jsx("div", {
+        className: "absolute",
+        style: {
+          left: "-10%",
+          top: "26%",
+          width: "130%",
+          height: 6,
+          background: "repeating-linear-gradient(90deg, transparent 0 50px, rgba(255,255,255,0.5) 50px 66px, transparent 66px 120px)",
+          animation: "seacrest 6s linear infinite",
+          filter: "blur(0.5px)"
+        }
+      }), /*#__PURE__*/_jsx("div", {
+        className: "absolute",
+        style: {
+          left: "-10%",
+          top: "58%",
+          width: "130%",
+          height: 6,
+          background: "repeating-linear-gradient(90deg, transparent 0 70px, rgba(255,255,255,0.45) 70px 84px, transparent 84px 150px)",
+          animation: "seacrest 4.5s linear infinite",
+          filter: "blur(0.5px)"
+        }
+      })]
+    }), /*#__PURE__*/_jsx("div", {
+      className: "absolute left-0 right-0 bottom-0",
+      style: {
+        top: "62%",
+        background: "linear-gradient(to bottom,#f7e2b0,#ecc987)"
+      }
+    }), /*#__PURE__*/_jsxs("svg", {
+      viewBox: "0 0 1200 130",
+      preserveAspectRatio: "none",
+      className: "absolute left-0 right-0",
+      style: {
+        top: "55%",
+        width: "100%",
+        height: 170
+      },
+      children: [/*#__PURE__*/_jsx("defs", {
+        children: /*#__PURE__*/_jsxs("linearGradient", {
+          id: "introshore",
+          x1: "0",
+          y1: "0",
+          x2: "0",
+          y2: "1",
+          children: [/*#__PURE__*/_jsx("stop", {
+            offset: "0%",
+            stopColor: "#7fd2de"
+          }), /*#__PURE__*/_jsx("stop", {
+            offset: "100%",
+            stopColor: "#bfeaec"
+          })]
+        })
+      }), /*#__PURE__*/_jsx("path", {
+        d: "M0,0 L1200,0 L1200,74 C1000,98 800,52 600,76 C400,100 200,54 0,74 Z",
+        fill: "url(#introshore)"
+      }), /*#__PURE__*/_jsx("path", {
+        d: "M0,66 C200,44 400,90 600,66 C800,42 1000,90 1200,66 L1200,86 C1000,110 800,54 600,84 C400,110 200,54 0,76 Z",
+        fill: "rgba(255,255,255,0.9)",
+        style: {
+          animation: "washF 4.8s ease-in-out infinite"
+        }
+      })]
+    }), [0, 1, 2, 3, 4, 5].map(i => /*#__PURE__*/_jsx("div", {
+      className: "absolute rounded-full",
+      style: {
+        left: `${28 + i * 6.5}%`,
+        top: `${90 - i * 4.5}%`,
+        width: 13 - i,
+        height: 18 - i,
+        background: "rgba(150,110,60,0.2)",
+        transform: `rotate(${i % 2 ? 14 : -14}deg)`,
+        filter: "blur(0.4px)"
+      }
+    }, "ifp" + i)), /*#__PURE__*/_jsx("div", {
+      className: "absolute",
+      style: {
+        right: "5%",
+        bottom: "22%",
+        fontSize: 135,
+        transformOrigin: "bottom center",
+        animation: "sway 5s ease-in-out infinite",
+        filter: "drop-shadow(0 8px 6px rgba(0,0,0,0.18))"
+      },
+      children: "🌴"
+    }), /*#__PURE__*/_jsx("div", {
+      className: "absolute",
+      style: {
+        right: "19%",
+        bottom: "30%",
+        fontSize: 92,
+        transformOrigin: "bottom center",
+        animation: "sway 6s ease-in-out infinite",
+        animationDelay: ".5s",
+        filter: "drop-shadow(0 6px 5px rgba(0,0,0,0.16))"
+      },
+      children: "🌴"
+    })]
+  });
 }
 
 // ============================================================
@@ -257,47 +963,113 @@ function IntroBeach() {
 // ============================================================
 const SUPABASE_URL = "https://ltaxxqrzsuvbwzykmlqm.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_suuduGHGRP4E3YSVmkFZpA_9MdFGy7e";
-
 const SB_HEADERS = {
   apikey: SUPABASE_ANON_KEY,
-  "Content-Type": "application/json",
+  "Content-Type": "application/json"
 };
 const supaStorage = {
   async get(key, shared) {
     if (!shared) {
-      try { const v = localStorage.getItem(key); return v != null ? { key, value: v, shared: false } : null; } catch (e) { return null; }
+      try {
+        const v = localStorage.getItem(key);
+        return v != null ? {
+          key,
+          value: v,
+          shared: false
+        } : null;
+      } catch (e) {
+        return null;
+      }
     }
     try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/kv?key=eq.${encodeURIComponent(key)}&select=val`, { headers: SB_HEADERS });
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/kv?key=eq.${encodeURIComponent(key)}&select=val`, {
+        headers: SB_HEADERS
+      });
       if (!res.ok) return null;
       const rows = await res.json();
-      return rows[0] ? { key, value: rows[0].val, shared: true } : null;
-    } catch (e) { return null; }
+      return rows[0] ? {
+        key,
+        value: rows[0].val,
+        shared: true
+      } : null;
+    } catch (e) {
+      return null;
+    }
   },
   async set(key, value, shared) {
-    if (!shared) { try { localStorage.setItem(key, value); } catch (e) {} return { key, value, shared: false }; }
+    if (!shared) {
+      try {
+        localStorage.setItem(key, value);
+      } catch (e) {}
+      return {
+        key,
+        value,
+        shared: false
+      };
+    }
     try {
-      await fetch(`${SUPABASE_URL}/rest/v1/kv`, { method: "POST", headers: { ...SB_HEADERS, Prefer: "resolution=merge-duplicates,return=minimal" }, body: JSON.stringify({ key, val: value }) });
+      await fetch(`${SUPABASE_URL}/rest/v1/kv`, {
+        method: "POST",
+        headers: {
+          ...SB_HEADERS,
+          Prefer: "resolution=merge-duplicates,return=minimal"
+        },
+        body: JSON.stringify({
+          key,
+          val: value
+        })
+      });
     } catch (e) {}
-    return { key, value, shared: true };
+    return {
+      key,
+      value,
+      shared: true
+    };
   },
   async delete(key, shared) {
-    if (!shared) { try { localStorage.removeItem(key); } catch (e) {} return { key, deleted: true }; }
-    try { await fetch(`${SUPABASE_URL}/rest/v1/kv?key=eq.${encodeURIComponent(key)}`, { method: "DELETE", headers: SB_HEADERS }); } catch (e) {}
-    return { key, deleted: true };
+    if (!shared) {
+      try {
+        localStorage.removeItem(key);
+      } catch (e) {}
+      return {
+        key,
+        deleted: true
+      };
+    }
+    try {
+      await fetch(`${SUPABASE_URL}/rest/v1/kv?key=eq.${encodeURIComponent(key)}`, {
+        method: "DELETE",
+        headers: SB_HEADERS
+      });
+    } catch (e) {}
+    return {
+      key,
+      deleted: true
+    };
   },
   async list(prefix, shared) {
-    if (!shared) return { keys: [] };
+    if (!shared) return {
+      keys: []
+    };
     try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/kv?key=like.${encodeURIComponent(prefix)}*&select=key`, { headers: SB_HEADERS });
-      if (!res.ok) return { keys: [] };
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/kv?key=like.${encodeURIComponent(prefix)}*&select=key`, {
+        headers: SB_HEADERS
+      });
+      if (!res.ok) return {
+        keys: []
+      };
       const rows = await res.json();
-      return { keys: rows.map((r) => r.key) };
-    } catch (e) { return { keys: [] }; }
-  },
+      return {
+        keys: rows.map(r => r.key)
+      };
+    } catch (e) {
+      return {
+        keys: []
+      };
+    }
+  }
 };
 window.storage = supaStorage;
-
 function App() {
   const [bottles, setBottles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -309,7 +1081,6 @@ function App() {
   const [nickname, setNickname] = useState("");
   const [myReactions, setMyReactions] = useState({});
   const [myId, setMyId] = useState("");
-
   const [fTheme, setFTheme] = useState("");
   const [fItems, setFItems] = useState("");
   const [fNick, setFNick] = useState("");
@@ -319,52 +1090,85 @@ function App() {
   const [filter, setFilter] = useState("all");
   const [intro, setIntro] = useState(true);
   const [introStep, setIntroStep] = useState("beach");
-
   const vpRef = useRef(null);
-  const [vp, setVp] = useState({ w: 0, h: 0 });
-  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [vp, setVp] = useState({
+    w: 0,
+    h: 0
+  });
+  const [pan, setPan] = useState({
+    x: 0,
+    y: 0
+  });
   const [zoom, setZoom] = useState(1);
-  const drag = useRef({ on: false, sx: 0, sy: 0, ox: 0, oy: 0, moved: false });
+  const drag = useRef({
+    on: false,
+    sx: 0,
+    sy: 0,
+    ox: 0,
+    oy: 0,
+    moved: false
+  });
   const centered = useRef(false);
   const [hint, setHint] = useState(true);
   const [decor, setDecor] = useState([]);
   const [footprints] = useState(() => generateFootprints());
-
   const [soundOn, setSoundOn] = useState(false);
   const audioRef = useRef(null);
-
   const mmW = vp.w && vp.w < 480 ? 104 : 150;
-  const mmH = Math.round((mmW * WORLD_H) / WORLD_W);
+  const mmH = Math.round(mmW * WORLD_H / WORLD_W);
   const ms = mmW / WORLD_W;
   const mmPressed = useRef(false);
-
   function clampPanZ(p, z) {
-    const minX = Math.min(0, vp.w - WORLD_W * z), minY = Math.min(0, vp.h - WORLD_H * z);
-    return { x: Math.max(minX, Math.min(0, p.x)), y: Math.max(minY, Math.min(0, p.y)) };
+    const minX = Math.min(0, vp.w - WORLD_W * z),
+      minY = Math.min(0, vp.h - WORLD_H * z);
+    return {
+      x: Math.max(minX, Math.min(0, p.x)),
+      y: Math.max(minY, Math.min(0, p.y))
+    };
   }
-  const clampPan = (p) => clampPanZ(p, zoom);
+  const clampPan = p => clampPanZ(p, zoom);
   const minZoom = vp.w && vp.h ? Math.max(vp.w / WORLD_W, vp.h / WORLD_H) : 0.5;
   const maxZoom = Math.max(1.6, minZoom + 0.4);
-
-  useEffect(() => { loadAll(); return () => stopSound(); }, []);
-  useEffect(() => { const t = setTimeout(() => setLoading(false), 4000); return () => clearTimeout(t); }, []);
-
+  useEffect(() => {
+    loadAll();
+    return () => stopSound();
+  }, []);
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 4000);
+    return () => clearTimeout(t);
+  }, []);
   useEffect(() => {
     if (!intro) return;
-    if (introStep === "beach") { const t = setTimeout(() => setIntroStep("bottle"), 4500); return () => clearTimeout(t); }
-    if (introStep === "pop") { const t = setTimeout(() => setIntroStep("letter"), ANIM_PRESETS[1].dur * 1000 + 250); return () => clearTimeout(t); }
+    if (introStep === "beach") {
+      const t = setTimeout(() => setIntroStep("bottle"), 4500);
+      return () => clearTimeout(t);
+    }
+    if (introStep === "pop") {
+      const t = setTimeout(() => setIntroStep("letter"), ANIM_PRESETS[1].dur * 1000 + 250);
+      return () => clearTimeout(t);
+    }
   }, [intro, introStep]);
-
-  const posKey = bottles.map((b) => { const p = getPos(b); return b.id + ":" + p.x + ":" + p.y; }).sort().join("|");
-  useEffect(() => { if (!loading) setDecor(placeDecor(bottles)); }, [posKey, loading]);
-
+  const posKey = bottles.map(b => {
+    const p = getPos(b);
+    return b.id + ":" + p.x + ":" + p.y;
+  }).sort().join("|");
   useEffect(() => {
-    function measure() { if (vpRef.current) { const r = vpRef.current.getBoundingClientRect(); setVp({ w: r.width, h: r.height }); } }
+    if (!loading) setDecor(placeDecor(bottles));
+  }, [posKey, loading]);
+  useEffect(() => {
+    function measure() {
+      if (vpRef.current) {
+        const r = vpRef.current.getBoundingClientRect();
+        setVp({
+          w: r.width,
+          h: r.height
+        });
+      }
+    }
     measure();
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
   }, []);
-
   useEffect(() => {
     if (!vp.w) return;
     const mz = Math.max(vp.w / WORLD_W, vp.h / WORLD_H);
@@ -373,36 +1177,74 @@ function App() {
       centered.current = true;
       const z0 = Math.min(Math.max(1, mz), mxz);
       setZoom(z0);
-      setPan(clampPanZ({ x: (vp.w - WORLD_W * z0) / 2, y: (vp.h - WORLD_H * z0) / 2.4 }, z0));
+      setPan(clampPanZ({
+        x: (vp.w - WORLD_W * z0) / 2,
+        y: (vp.h - WORLD_H * z0) / 2.4
+      }, z0));
     } else {
       const nz = Math.min(Math.max(zoom, mz), mxz);
       setZoom(nz);
-      setPan((p) => clampPanZ(p, nz));
+      setPan(p => clampPanZ(p, nz));
     }
   }, [vp]);
-
   useEffect(() => {
-    const minX = Math.min(0, vp.w - WORLD_W * zoom), minY = Math.min(0, vp.h - WORLD_H * zoom);
-    const clamp = (p) => ({ x: Math.max(minX, Math.min(0, p.x)), y: Math.max(minY, Math.min(0, p.y)) });
+    const minX = Math.min(0, vp.w - WORLD_W * zoom),
+      minY = Math.min(0, vp.h - WORLD_H * zoom);
+    const clamp = p => ({
+      x: Math.max(minX, Math.min(0, p.x)),
+      y: Math.max(minY, Math.min(0, p.y))
+    });
     function move(e) {
       if (!drag.current.on) return;
-      const dx = e.clientX - drag.current.sx, dy = e.clientY - drag.current.sy;
-      if (Math.abs(dx) + Math.abs(dy) > 6) { drag.current.moved = true; setHint(false); }
-      setPan(clamp({ x: drag.current.ox + dx, y: drag.current.oy + dy }));
+      const dx = e.clientX - drag.current.sx,
+        dy = e.clientY - drag.current.sy;
+      if (Math.abs(dx) + Math.abs(dy) > 6) {
+        drag.current.moved = true;
+        setHint(false);
+      }
+      setPan(clamp({
+        x: drag.current.ox + dx,
+        y: drag.current.oy + dy
+      }));
     }
-    function up() { drag.current.on = false; mmPressed.current = false; }
+    function up() {
+      drag.current.on = false;
+      mmPressed.current = false;
+    }
     window.addEventListener("pointermove", move);
     window.addEventListener("pointerup", up);
-    return () => { window.removeEventListener("pointermove", move); window.removeEventListener("pointerup", up); };
+    return () => {
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", up);
+    };
   }, [vp, zoom]);
-
-  function onPanStart(e) { drag.current = { on: true, sx: e.clientX, sy: e.clientY, ox: pan.x, oy: pan.y, moved: false }; }
-  function recenter() { setPan(clampPan({ x: (vp.w - WORLD_W * zoom) / 2, y: (vp.h - WORLD_H * zoom) / 2.4 })); }
+  function onPanStart(e) {
+    drag.current = {
+      on: true,
+      sx: e.clientX,
+      sy: e.clientY,
+      ox: pan.x,
+      oy: pan.y,
+      moved: false
+    };
+  }
+  function recenter() {
+    setPan(clampPan({
+      x: (vp.w - WORLD_W * zoom) / 2,
+      y: (vp.h - WORLD_H * zoom) / 2.4
+    }));
+  }
   function setZoomAround(z1) {
-    const z0 = zoom, cx = vp.w / 2, cy = vp.h / 2;
-    const wx = (cx - pan.x) / z0, wy = (cy - pan.y) / z0;
+    const z0 = zoom,
+      cx = vp.w / 2,
+      cy = vp.h / 2;
+    const wx = (cx - pan.x) / z0,
+      wy = (cy - pan.y) / z0;
     setZoom(z1);
-    setPan(clampPanZ({ x: cx - wx * z1, y: cy - wy * z1 }, z1));
+    setPan(clampPanZ({
+      x: cx - wx * z1,
+      y: cy - wy * z1
+    }, z1));
   }
   function onWheel(e) {
     const dir = e.deltaY > 0 ? -0.12 : 0.12;
@@ -410,10 +1252,13 @@ function App() {
   }
   function mmJump(e) {
     const rect = e.currentTarget.getBoundingClientRect();
-    const wx = (e.clientX - rect.left) / ms, wy = (e.clientY - rect.top) / ms;
-    setPan(clampPanZ({ x: vp.w / 2 - wx * zoom, y: vp.h / 2 - wy * zoom }, zoom));
+    const wx = (e.clientX - rect.left) / ms,
+      wy = (e.clientY - rect.top) / ms;
+    setPan(clampPanZ({
+      x: vp.w / 2 - wx * zoom,
+      y: vp.h / 2 - wy * zoom
+    }, zoom));
   }
-
   function startSound() {
     try {
       const Ctx = window.AudioContext || window.webkitAudioContext;
@@ -422,59 +1267,154 @@ function App() {
       const buffer = ac.createBuffer(1, size, ac.sampleRate);
       const data = buffer.getChannelData(0);
       let last = 0;
-      for (let i = 0; i < size; i++) { const white = Math.random() * 2 - 1; last = (last + 0.02 * white) / 1.02; data[i] = last * 3.2; }
-      const noise = ac.createBufferSource(); noise.buffer = buffer; noise.loop = true;
-      const lp = ac.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 600;
-      const master = ac.createGain(); master.gain.value = 0.1;
-      noise.connect(lp); lp.connect(master); master.connect(ac.destination);
-      const lfo = ac.createOscillator(); lfo.frequency.value = 0.11;
-      const lfoGain = ac.createGain(); lfoGain.gain.value = 0.08;
-      lfo.connect(lfoGain); lfoGain.connect(master.gain);
-      const lfo2 = ac.createOscillator(); lfo2.frequency.value = 0.07;
-      const lfo2Gain = ac.createGain(); lfo2Gain.gain.value = 320;
-      lfo2.connect(lfo2Gain); lfo2Gain.connect(lp.frequency);
-      const hiss = ac.createBufferSource(); hiss.buffer = buffer; hiss.loop = true;
-      const bp = ac.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = 3200; bp.Q.value = 0.7;
-      const hissGain = ac.createGain(); hissGain.gain.value = 0.0;
-      hiss.connect(bp); bp.connect(hissGain); hissGain.connect(ac.destination);
-      const lfo3 = ac.createOscillator(); lfo3.frequency.value = 0.09;
-      const lfo3Gain = ac.createGain(); lfo3Gain.gain.value = 0.03;
-      const hissBase = ac.createConstantSource(); hissBase.offset.value = 0.03;
-      lfo3.connect(lfo3Gain); lfo3Gain.connect(hissGain.gain); hissBase.connect(hissGain.gain);
-      noise.start(); lfo.start(); lfo2.start(); hiss.start(); lfo3.start(); hissBase.start();
-      audioRef.current = { ac, nodes: [noise, lfo, lfo2, hiss, lfo3, hissBase] };
-    } catch (e) { console.error("사운드 실패", e); }
+      for (let i = 0; i < size; i++) {
+        const white = Math.random() * 2 - 1;
+        last = (last + 0.02 * white) / 1.02;
+        data[i] = last * 3.2;
+      }
+      const noise = ac.createBufferSource();
+      noise.buffer = buffer;
+      noise.loop = true;
+      const lp = ac.createBiquadFilter();
+      lp.type = "lowpass";
+      lp.frequency.value = 600;
+      const master = ac.createGain();
+      master.gain.value = 0.1;
+      noise.connect(lp);
+      lp.connect(master);
+      master.connect(ac.destination);
+      const lfo = ac.createOscillator();
+      lfo.frequency.value = 0.11;
+      const lfoGain = ac.createGain();
+      lfoGain.gain.value = 0.08;
+      lfo.connect(lfoGain);
+      lfoGain.connect(master.gain);
+      const lfo2 = ac.createOscillator();
+      lfo2.frequency.value = 0.07;
+      const lfo2Gain = ac.createGain();
+      lfo2Gain.gain.value = 320;
+      lfo2.connect(lfo2Gain);
+      lfo2Gain.connect(lp.frequency);
+      const hiss = ac.createBufferSource();
+      hiss.buffer = buffer;
+      hiss.loop = true;
+      const bp = ac.createBiquadFilter();
+      bp.type = "bandpass";
+      bp.frequency.value = 3200;
+      bp.Q.value = 0.7;
+      const hissGain = ac.createGain();
+      hissGain.gain.value = 0.0;
+      hiss.connect(bp);
+      bp.connect(hissGain);
+      hissGain.connect(ac.destination);
+      const lfo3 = ac.createOscillator();
+      lfo3.frequency.value = 0.09;
+      const lfo3Gain = ac.createGain();
+      lfo3Gain.gain.value = 0.03;
+      const hissBase = ac.createConstantSource();
+      hissBase.offset.value = 0.03;
+      lfo3.connect(lfo3Gain);
+      lfo3Gain.connect(hissGain.gain);
+      hissBase.connect(hissGain.gain);
+      noise.start();
+      lfo.start();
+      lfo2.start();
+      hiss.start();
+      lfo3.start();
+      hissBase.start();
+      audioRef.current = {
+        ac,
+        nodes: [noise, lfo, lfo2, hiss, lfo3, hissBase]
+      };
+    } catch (e) {
+      console.error("사운드 실패", e);
+    }
   }
   function stopSound() {
     const a = audioRef.current;
-    if (a) { try { a.nodes.forEach((n) => n.stop && n.stop()); } catch (e) {} try { a.ac.close(); } catch (e) {} audioRef.current = null; }
+    if (a) {
+      try {
+        a.nodes.forEach(n => n.stop && n.stop());
+      } catch (e) {}
+      try {
+        a.ac.close();
+      } catch (e) {}
+      audioRef.current = null;
+    }
   }
-  function toggleSound() { if (soundOn) { stopSound(); setSoundOn(false); } else { startSound(); setSoundOn(true); } }
-
+  function toggleSound() {
+    if (soundOn) {
+      stopSound();
+      setSoundOn(false);
+    } else {
+      startSound();
+      setSoundOn(true);
+    }
+  }
   async function loadAll() {
     setLoading(true);
     let id = "";
-    try { const r = await window.storage.get("my-id", false); if (r) id = JSON.parse(r.value); } catch (e) {}
-    if (!id) { id = "u_" + Date.now() + "_" + Math.random().toString(36).slice(2, 8); try { await window.storage.set("my-id", JSON.stringify(id), false); } catch (e) {} }
+    try {
+      const r = await window.storage.get("my-id", false);
+      if (r) id = JSON.parse(r.value);
+    } catch (e) {}
+    if (!id) {
+      id = "u_" + Date.now() + "_" + Math.random().toString(36).slice(2, 8);
+      try {
+        await window.storage.set("my-id", JSON.stringify(id), false);
+      } catch (e) {}
+    }
     setMyId(id);
     try {
       const res = await window.storage.list("bottle:", true);
-      const keys = (res && res.keys) || [];
+      const keys = res && res.keys || [];
       const loaded = [];
-      for (const k of keys) { try { const r = await window.storage.get(k, true); if (r) loaded.push(JSON.parse(r.value)); } catch (e) {} }
+      for (const k of keys) {
+        try {
+          const r = await window.storage.get(k, true);
+          if (r) loaded.push(JSON.parse(r.value));
+        } catch (e) {}
+      }
       loaded.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
       setBottles(loaded);
-    } catch (e) { console.error("불러오기 실패", e); }
-    try { const n = await window.storage.get("nickname", false); if (n) { const val = JSON.parse(n.value); setNickname(val); setFNick(val); } } catch (e) {}
-    try { const mr = await window.storage.get("my-reactions", false); if (mr) setMyReactions(JSON.parse(mr.value)); } catch (e) {}
+    } catch (e) {
+      console.error("불러오기 실패", e);
+    }
+    try {
+      const n = await window.storage.get("nickname", false);
+      if (n) {
+        const val = JSON.parse(n.value);
+        setNickname(val);
+        setFNick(val);
+      }
+    } catch (e) {}
+    try {
+      const mr = await window.storage.get("my-reactions", false);
+      if (mr) setMyReactions(JSON.parse(mr.value));
+    } catch (e) {}
     setLoading(false);
   }
-
-  function openCreate() { setEditId(null); setFTheme(""); setFItems(""); setFNick(nickname); setFColor(Math.floor(Math.random() * BOTTLE_COLORS.length)); setFCat("none"); setCreating(true); }
-  function openEdit(b) { setEditId(b.id); setFTheme(b.theme); setFItems(b.items); setFNick(b.nickname); setFColor(b.colorIndex || 0); setFCat(b.category || "none"); setCreating(true); }
-
+  function openCreate() {
+    setEditId(null);
+    setFTheme("");
+    setFItems("");
+    setFNick(nickname);
+    setFColor(Math.floor(Math.random() * BOTTLE_COLORS.length));
+    setFCat("none");
+    setCreating(true);
+  }
+  function openEdit(b) {
+    setEditId(b.id);
+    setFTheme(b.theme);
+    setFItems(b.items);
+    setFNick(b.nickname);
+    setFColor(b.colorIndex || 0);
+    setFCat(b.category || "none");
+    setCreating(true);
+  }
   async function saveBottle() {
-    const theme = fTheme.trim(), items = fItems.trim();
+    const theme = fTheme.trim(),
+      items = fItems.trim();
     const nick = fNick.trim() || "익명의 GNA 주민";
     if (!theme || !items) return;
     if (editId) {
@@ -482,103 +1422,174 @@ function App() {
         const r = await window.storage.get("bottle:" + editId, true);
         const latest = r ? JSON.parse(r.value) : null;
         if (latest) {
-          latest.theme = theme; latest.items = items; latest.nickname = nick; latest.colorIndex = catColorIndex(fCat); latest.category = fCat;
+          latest.theme = theme;
+          latest.items = items;
+          latest.nickname = nick;
+          latest.colorIndex = catColorIndex(fCat);
+          latest.category = fCat;
           await window.storage.set("bottle:" + editId, JSON.stringify(latest), true);
-          setBottles((prev) => prev.map((b) => (b.id === editId ? latest : b)));
+          setBottles(prev => prev.map(b => b.id === editId ? latest : b));
         }
         await window.storage.set("nickname", JSON.stringify(nick), false);
-      } catch (e) { console.error("수정 실패", e); }
-      setNickname(nick); setCreating(false); setEditId(null);
+      } catch (e) {
+        console.error("수정 실패", e);
+      }
+      setNickname(nick);
+      setCreating(false);
+      setEditId(null);
       return;
     }
     const id = "b_" + Date.now() + "_" + Math.random().toString(36).slice(2, 7);
     const bx = 180 + Math.random() * (WORLD_W - 360);
     const by = SEA_H + 80 + Math.random() * (WORLD_H - SEA_H - 240);
     const bottle = {
-      id, theme, items, nickname: nick, ownerId: myId, createdAt: Date.now(),
-      reactions: { heart: 0, yum: 0, fire: 0, up: 0 }, comments: [], colorIndex: catColorIndex(fCat), category: fCat,
-      bob: Math.random() * 3, tilt: Math.random() * 8 - 4,
-      anim: Math.floor(Math.random() * ANIM_PRESETS.length), speed: +(0.85 + Math.random() * 0.4).toFixed(2),
-      x: Math.round(bx), y: Math.round(by),
+      id,
+      theme,
+      items,
+      nickname: nick,
+      ownerId: myId,
+      createdAt: Date.now(),
+      reactions: {
+        heart: 0,
+        yum: 0,
+        fire: 0,
+        up: 0
+      },
+      comments: [],
+      colorIndex: catColorIndex(fCat),
+      category: fCat,
+      bob: Math.random() * 3,
+      tilt: Math.random() * 8 - 4,
+      anim: Math.floor(Math.random() * ANIM_PRESETS.length),
+      speed: +(0.85 + Math.random() * 0.4).toFixed(2),
+      x: Math.round(bx),
+      y: Math.round(by)
     };
-    try { await window.storage.set("bottle:" + id, JSON.stringify(bottle), true); await window.storage.set("nickname", JSON.stringify(nick), false); } catch (e) { console.error("저장 실패", e); }
+    try {
+      await window.storage.set("bottle:" + id, JSON.stringify(bottle), true);
+      await window.storage.set("nickname", JSON.stringify(nick), false);
+    } catch (e) {
+      console.error("저장 실패", e);
+    }
     setNickname(nick);
-    setBottles((prev) => [bottle, ...prev]);
+    setBottles(prev => [bottle, ...prev]);
     setCreating(false);
     if (filter !== "all" && filter !== fCat) setFilter("all");
-    setPan(clampPan({ x: vp.w / 2 - bx * zoom, y: vp.h / 2 - by * zoom }));
+    setPan(clampPan({
+      x: vp.w / 2 - bx * zoom,
+      y: vp.h / 2 - by * zoom
+    }));
   }
-
   async function deleteBottle(b) {
-    try { await window.storage.delete("bottle:" + b.id, true); } catch (e) { console.error("삭제 실패", e); }
-    setBottles((prev) => prev.filter((x) => x.id !== b.id));
-    setConfirmDelete(false); setSelectedId(null);
+    try {
+      await window.storage.delete("bottle:" + b.id, true);
+    } catch (e) {
+      console.error("삭제 실패", e);
+    }
+    setBottles(prev => prev.filter(x => x.id !== b.id));
+    setConfirmDelete(false);
+    setSelectedId(null);
   }
-
   async function refreshBottles() {
     try {
       const res = await window.storage.list("bottle:", true);
-      const keys = (res && res.keys) || [];
+      const keys = res && res.keys || [];
       const loaded = [];
-      for (const k of keys) { try { const r = await window.storage.get(k, true); if (r) loaded.push(JSON.parse(r.value)); } catch (e) {} }
+      for (const k of keys) {
+        try {
+          const r = await window.storage.get(k, true);
+          if (r) loaded.push(JSON.parse(r.value));
+        } catch (e) {}
+      }
       loaded.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
       setBottles(loaded);
     } catch (e) {}
   }
-
-  useEffect(() => { const t = setInterval(() => refreshBottles(), 20000); return () => clearInterval(t); }, []);
-
+  useEffect(() => {
+    const t = setInterval(() => refreshBottles(), 20000);
+    return () => clearInterval(t);
+  }, []);
   function handleBottleClick(b) {
     if (drag.current.moved) return;
     setOpeningId(b.id);
     const a = getAnim(b);
-    setTimeout(() => { setSelectedId(b.id); setOpeningId(null); setConfirmDelete(false); }, a.dur * 1000 + 120);
+    setTimeout(() => {
+      setSelectedId(b.id);
+      setOpeningId(null);
+      setConfirmDelete(false);
+    }, a.dur * 1000 + 120);
   }
-
   async function toggleReaction(bottle, key) {
     const rk = bottle.id + ":" + key;
-    const has = !!myReactions[rk], delta = has ? -1 : 1;
-    const newMy = { ...myReactions };
-    if (has) delete newMy[rk]; else newMy[rk] = true;
+    const has = !!myReactions[rk],
+      delta = has ? -1 : 1;
+    const newMy = {
+      ...myReactions
+    };
+    if (has) delete newMy[rk];else newMy[rk] = true;
     setMyReactions(newMy);
-    setBottles((prev) => prev.map((b) => (b.id === bottle.id ? { ...b, reactions: { ...b.reactions, [key]: Math.max(0, (b.reactions[key] || 0) + delta) } } : b)));
+    setBottles(prev => prev.map(b => b.id === bottle.id ? {
+      ...b,
+      reactions: {
+        ...b.reactions,
+        [key]: Math.max(0, (b.reactions[key] || 0) + delta)
+      }
+    } : b));
     try {
       const r = await window.storage.get("bottle:" + bottle.id, true);
       const latest = r ? JSON.parse(r.value) : bottle;
-      latest.reactions = latest.reactions || { heart: 0, yum: 0, fire: 0, up: 0 };
+      latest.reactions = latest.reactions || {
+        heart: 0,
+        yum: 0,
+        fire: 0,
+        up: 0
+      };
       latest.reactions[key] = Math.max(0, (latest.reactions[key] || 0) + delta);
       await window.storage.set("bottle:" + bottle.id, JSON.stringify(latest), true);
-      setBottles((prev) => prev.map((b) => (b.id === bottle.id ? latest : b)));
+      setBottles(prev => prev.map(b => b.id === bottle.id ? latest : b));
       await window.storage.set("my-reactions", JSON.stringify(newMy), false);
-    } catch (e) { console.error("리액션 저장 실패", e); }
+    } catch (e) {
+      console.error("리액션 저장 실패", e);
+    }
   }
-
   async function addComment(bottle) {
     const text = commentText.trim();
     if (!text) return;
     const nick = nickname.trim() || "익명의 GNA 주민";
-    const comment = { nickname: nick, text, createdAt: Date.now() };
+    const comment = {
+      nickname: nick,
+      text,
+      createdAt: Date.now()
+    };
     setCommentText("");
     try {
       const r = await window.storage.get("bottle:" + bottle.id, true);
       const latest = r ? JSON.parse(r.value) : bottle;
       latest.comments = [...(latest.comments || []), comment];
       await window.storage.set("bottle:" + bottle.id, JSON.stringify(latest), true);
-      setBottles((prev) => prev.map((b) => (b.id === bottle.id ? latest : b)));
-    } catch (e) { console.error("댓글 저장 실패", e); }
+      setBottles(prev => prev.map(b => b.id === bottle.id ? latest : b));
+    } catch (e) {
+      console.error("댓글 저장 실패", e);
+    }
   }
-
-  const selected = bottles.find((b) => b.id === selectedId);
-  const opening = bottles.find((b) => b.id === openingId);
+  const selected = bottles.find(b => b.id === selectedId);
+  const opening = bottles.find(b => b.id === openingId);
   const openAnim = opening ? getAnim(opening) : null;
-  const visibleBottles = filter === "all" ? bottles : bottles.filter((b) => (b.category || "none") === filter);
-
-  const mmView = { left: (-pan.x / zoom) * ms, top: (-pan.y / zoom) * ms, w: (vp.w / zoom) * ms, h: (vp.h / zoom) * ms };
+  const visibleBottles = filter === "all" ? bottles : bottles.filter(b => (b.category || "none") === filter);
+  const mmView = {
+    left: -pan.x / zoom * ms,
+    top: -pan.y / zoom * ms,
+    w: vp.w / zoom * ms,
+    h: vp.h / zoom * ms
+  };
   const ctrlBtn = "w-10 h-10 flex items-center justify-center bg-white/90 hover:bg-white text-teal-700 rounded-full shadow-lg border border-teal-100 active:scale-90 transition";
-
-  return (
-    <div className="min-h-screen w-full text-stone-700 select-none flex flex-col overflow-hidden" style={{ fontFamily: "'Jua', 'Gaegu', system-ui, sans-serif" }}>
-      <style>{`
+  return /*#__PURE__*/_jsxs("div", {
+    className: "min-h-screen w-full text-stone-700 select-none flex flex-col overflow-hidden",
+    style: {
+      fontFamily: "'Jua', 'Gaegu', system-ui, sans-serif"
+    },
+    children: [/*#__PURE__*/_jsx("style", {
+      children: `
         @import url('https://fonts.googleapis.com/css2?family=Jua&family=Gaegu:wght@400;700&display=swap');
         @keyframes bob { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-8px) } }
         @keyframes wave { 0%{ background-position-x: 0 } 100%{ background-position-x: 60px } }
@@ -603,345 +1614,946 @@ function App() {
         .bob { animation: bob 4s ease-in-out infinite; }
         .pop { animation: pop .25s ease-out; }
         .nobar::-webkit-scrollbar{ display:none }
-      `}</style>
-
-      {intro && (
-        <div className="fixed inset-0 overflow-hidden" style={{ zIndex: 70 }}>
-          <IntroBeach />
-          <div className="absolute inset-0 transition-all duration-700" style={{ background: introStep === "letter" ? "rgba(10,40,60,0.58)" : introStep === "pop" ? "rgba(10,40,60,0.22)" : "rgba(10,40,60,0)" }} />
-
-          {introStep === "beach" && (
-            <div className="absolute top-6 left-1/2 -translate-x-1/2 bg-white/85 text-teal-800 text-sm px-4 py-2 rounded-full shadow" style={{ animation: "fadeup .6s ease both" }}>
-              🚶 해변을 거니는 중… 저 멀리 무언가 떠밀려 와요 🌊
-            </div>
-          )}
-
-          {introStep === "bottle" && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center" style={{ animation: "fadeup .7s ease both" }}>
-              <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 62% 56% at 50% 52%, rgba(6,28,46,0.55) 0%, rgba(6,28,46,0.22) 45%, rgba(6,28,46,0) 70%)" }} />
-              <div className="relative flex flex-col items-center">
-                <div className="relative">
-                  <div className="absolute left-1/2 top-1/2 rounded-full" style={{ width: 230, height: 230, transform: "translate(-50%,-50%)", background: "radial-gradient(circle, rgba(255,250,225,0.6) 0%, rgba(255,250,225,0) 70%)" }} />
-                  <button onClick={() => setIntroStep("pop")} className="relative bob focus:outline-none active:scale-95 transition" style={{ animationDuration: "4s", filter: "drop-shadow(0 10px 12px rgba(0,0,0,0.35))" }}>
-                    <Bottle color={BOTTLE_COLORS[0]} scale={1.7} />
-                  </button>
-                </div>
-                <p className="mt-7 text-white text-lg" style={{ animation: "fadeup .6s ease both", animationDelay: ".3s", textShadow: "0 2px 10px rgba(0,0,0,0.65)" }}>유리병 편지가 떠밀려 왔어요</p>
-                <p className="mt-1 text-white text-sm animate-pulse" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.65)" }}>👆 톡 눌러 열어보세요</p>
-              </div>
-            </div>
-          )}
-
-          {introStep === "pop" && (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="relative flex flex-col items-center">
-                <div className="absolute left-1/2 z-10" style={{ top: "10px", animation: `${ANIM_PRESETS[1].cork} ${ANIM_PRESETS[1].dur}s ease-out forwards` }}>
-                  <div className="w-8 h-8 bg-amber-600 rounded-lg border-2 border-amber-700 shadow-lg" />
-                </div>
-                <div className="absolute left-1/2 z-20 text-3xl text-white drop-shadow" style={{ top: "-12px", animation: `poptext ${(ANIM_PRESETS[1].dur + 0.1).toFixed(2)}s ease-out forwards` }}>뿅!</div>
-                {ANIM_PRESETS[1].sparkles.map((s, i) => (<div key={"is" + i} className="absolute left-1/2 top-8 text-2xl z-10" style={{ "--end": s.end, animation: `sparklefly ${ANIM_PRESETS[1].dur}s ease-out forwards`, animationDelay: `${i * 0.04}s` }}>{s.e}</div>))}
-                {ANIM_PRESETS[1].droplets.map((d, i) => (<div key={"id" + i} className="absolute left-1/2 top-12 w-3.5 h-3.5 rounded-full bg-cyan-300/90 border border-cyan-100 z-10" style={{ "--dend": d.end, animation: `dropletfly ${ANIM_PRESETS[1].dur}s ease-in forwards`, animationDelay: `${d.d}s` }} />))}
-                <div style={{ animation: `bottlewiggle ${ANIM_PRESETS[1].dur}s ease-in-out` }}><Bottle color={BOTTLE_COLORS[0]} scale={1.9} showCork={false} /></div>
-              </div>
-            </div>
-          )}
-
-          {introStep === "letter" && (
-            <div className="absolute inset-0 overflow-y-auto flex flex-col items-center justify-center px-6 py-12 text-center">
-              <div className="w-full max-w-md text-left" style={{ animation: "fadeup .6s ease both" }}>
-                <div className="relative rounded-2xl px-7 py-7 shadow-2xl border border-amber-200" style={{ transform: "rotate(-1deg)", fontFamily: "'Gaegu', cursive", backgroundColor: "#fffdf3", backgroundImage: "repeating-linear-gradient(transparent, transparent 35px, #ecdfbe 36px)" }}>
-                  <div className="absolute -top-3 -right-2 text-3xl" style={{ transform: "rotate(12deg)" }}>🍶</div>
-                  <p style={{ fontSize: "19px", lineHeight: "36px", color: "#3a2f23" }}>
-                    GNA 해변에 온 걸 환영해요. 새로운 표류자.<br /><br />
-                    이 편지를 발견했다는 건, 당신도 이제 이 해변의 비밀을 알아버렸다는 뜻이겠죠? 여기엔 동료들이 슬쩍 띄워둔 취향이 유리병에 담겨 떠다닌답니다.<br /><br />
-                    아끼는 콘텐츠(영화, 드라마 등), 혼자 알기 아까운 서초구 맛집, GNA Life 꿀팁... 유리병의 코르크를 <b>뿅!</b> 열면 누군가의 취향 한 장이 펼쳐질 거에요.<br /><br />
-                    그러니 천천히 거닐고, 줍고, 열어보고.. 떠나기 전엔 당신의 유리병도 띄워두고 가주세요. 다음 표류자를 위해...<br /><br />
-                    당신의 작은 이야기가 누군가에게는 큰 위로가 될지도 모르니까요. 🐚
-                  </p>
-                </div>
-              </div>
-              <button onClick={() => setIntro(false)} className="mt-6 bg-teal-500 hover:bg-teal-600 active:scale-95 transition text-white text-lg px-8 py-3.5 rounded-full shadow-xl border-2 border-teal-600" style={{ animation: "fadeup .5s ease both", animationDelay: ".5s" }}>
-                🏖️ 해변으로 들어가기
-              </button>
-            </div>
-          )}
-        </div>
-      )}
-
-      <div className="bg-gradient-to-b from-sky-300 to-sky-200 pt-6 pb-3 px-4 text-center relative overflow-hidden">
-        <div className="absolute top-4 left-8 w-20 h-7 bg-white/70 rounded-full blur-[1px]" />
-        <div className="absolute top-7 right-12 w-24 h-8 bg-white/70 rounded-full blur-[1px]" />
-        <h1 className="relative text-2xl sm:text-3xl text-white drop-shadow-[0_2px_0_rgba(95,184,163,0.6)]">🏝️ GNA 유리병 편지</h1>
-        <p className="relative mt-1 text-xs sm:text-sm text-teal-800/80">해변을 끌어서 둘러보고, 마음에 드는 유리병을 열어보세요 🍶</p>
-      </div>
-
-      <div className="bg-sky-100 px-3 py-2 flex gap-2 overflow-x-auto nobar" style={{ scrollbarWidth: "none" }}>
-        <button onClick={() => setFilter("all")} className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-sm border-2 shrink-0 transition ${filter === "all" ? "text-white border-teal-500" : "bg-white text-stone-500 border-stone-200"}`} style={filter === "all" ? { background: "#14b8a6" } : undefined}>
-          🌊 전체
-        </button>
-        {CATEGORIES.map((c) => {
-          const active = filter === c.key;
-          return (
-            <button key={c.key} onClick={() => setFilter(c.key)} className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-sm border-2 shrink-0 transition ${active ? "text-white" : "bg-white text-stone-500 border-stone-200"}`} style={active ? { background: c.color, borderColor: c.color } : undefined}>
-              {c.icon} {c.label}
-            </button>
-          );
-        })}
-      </div>
-
-      <div ref={vpRef} onPointerDown={onPanStart} onWheel={onWheel} className="relative overflow-hidden bg-cyan-200" style={{ height: "70vh", cursor: drag.current.on ? "grabbing" : "grab", touchAction: "none" }}>
-        <div className="absolute top-0 left-0" style={{ width: WORLD_W, height: WORLD_H, transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`, transformOrigin: "0 0" }}>
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom,#fdebc8,#f3d9a8)" }} />
-          <div className="absolute top-0 left-0 right-0" style={{ height: SEA_H, background: "linear-gradient(to bottom,#2da7bd 0%,#5fc8d6 50%,#9fe0e4 100%)" }}>
-            <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle at 15px 0, transparent 10px, rgba(255,255,255,0.5) 11px, transparent 12px)", backgroundSize: "30px 20px", animation: "wave 3s linear infinite" }} />
-            <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle at 30px 10px, transparent 8px, rgba(255,255,255,0.28) 9px, transparent 10px)", backgroundSize: "54px 34px", animation: "wave 5s linear infinite reverse" }} />
-            <div className="absolute inset-0" style={{ backgroundImage: "repeating-linear-gradient(115deg, transparent 0 42px, rgba(255,255,255,0.14) 42px 48px, transparent 48px 96px)", animation: "shimmer 5s ease-in-out infinite" }} />
-          </div>
-          <div className="absolute left-0" style={{ top: SEA_H - 110, width: WORLD_W + 140, height: 14, pointerEvents: "none", animation: "seacrest 6s linear infinite", background: "repeating-linear-gradient(90deg, transparent 0 60px, rgba(255,255,255,0.45) 60px 78px, transparent 78px 140px)", borderRadius: 20, filter: "blur(1px)" }} />
-          <div className="absolute left-0" style={{ top: SEA_H - 70, width: WORLD_W + 140, height: 12, pointerEvents: "none", animation: "seacrest 4.5s linear infinite", background: "repeating-linear-gradient(90deg, transparent 0 80px, rgba(255,255,255,0.4) 80px 96px, transparent 96px 170px)", borderRadius: 20, filter: "blur(1px)" }} />
-
-          <svg viewBox="0 0 1200 100" preserveAspectRatio="none" width="100%" height="120" style={{ position: "absolute", left: 0, top: SEA_H - 6, pointerEvents: "none" }}>
-            <defs>
-              <linearGradient id="shorewater" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#9fe0e4" />
-                <stop offset="100%" stopColor="#bdeaec" />
-              </linearGradient>
-            </defs>
-            <path d="M0,0 L1200,0 L1200,58 C1090,84 980,40 870,60 C760,80 650,42 540,62 C430,82 320,42 210,62 C120,78 40,48 0,58 Z" fill="url(#shorewater)" />
-          </svg>
-          <div className="absolute left-0 right-0" style={{ top: SEA_H - 60, height: 160, pointerEvents: "none" }}>
-            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" width="100%" height="160" style={{ position: "absolute", left: 0, top: 0, animation: "washB 8s ease-in-out infinite" }}>
-              <path d="M0,66 C120,40 240,90 360,66 C480,40 600,90 720,66 C840,40 960,90 1080,66 C1140,54 1200,72 1200,68 L1200,120 L0,120 Z" fill="rgba(150,216,226,0.45)" />
-            </svg>
-            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" width="100%" height="160" style={{ position: "absolute", left: 0, top: 0, animation: "washF 4.8s ease-in-out infinite" }}>
-              <defs>
-                <linearGradient id="foamblue" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="rgba(120,210,228,0.7)" />
-                  <stop offset="55%" stopColor="rgba(74,184,210,0.5)" />
-                  <stop offset="100%" stopColor="rgba(54,162,192,0.18)" />
-                </linearGradient>
-              </defs>
-              <path d="M0,58 C100,26 200,90 300,58 C400,26 500,90 600,58 C700,26 800,90 900,58 C1000,26 1100,90 1200,58 L1200,120 L0,120 Z" fill="url(#foamblue)" />
-            </svg>
-            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" width="100%" height="160" style={{ position: "absolute", left: 0, top: 0, animation: "washF 4.8s ease-in-out infinite" }}>
-              <path d="M0,60 C100,28 200,92 300,60 C400,28 500,92 600,60 C700,28 800,92 900,60 C1000,28 1100,92 1200,60 L1200,76 C1100,108 1000,44 900,76 C800,108 700,44 600,76 C500,108 400,44 300,76 C200,108 100,44 0,76 Z" fill="rgba(40,130,162,0.4)" />
-            </svg>
-            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" width="100%" height="160" style={{ position: "absolute", left: 0, top: 0, animation: "washF 4.8s ease-in-out infinite" }}>
-              <path d="M0,52 C100,20 200,84 300,52 C400,20 500,84 600,52 C700,20 800,84 900,52 C1000,20 1100,84 1200,52 L1200,70 C1100,102 1000,38 900,70 C800,102 700,38 600,70 C500,102 400,38 300,70 C200,102 100,38 0,70 Z" fill="rgba(255,255,255,0.92)" />
-            </svg>
-          </div>
-          <div className="absolute rounded-full bg-cyan-200/50 blur-md" style={{ left: 420, top: 820, width: 200, height: 76 }} />
-          <div className="absolute rounded-full bg-cyan-200/50 blur-md" style={{ left: 1300, top: 640, width: 160, height: 64 }} />
-
-          {footprints.map((f, i) => (
-            <div key={"fp" + i} className="absolute rounded-full" style={{ left: f.x, top: f.y, width: 9, height: 13, background: "rgba(120,80,40,0.13)", transform: `translate(-50%,-50%) rotate(${f.a}deg)` }} />
-          ))}
-
-          {decor.map((d, i) => {
-            const a = decorAnim(d.e);
-            return (
-              <div key={i} className="absolute" style={{ left: d.x, top: d.y, transform: "translate(-50%,-50%)" }}>
-                {!d.water && <div className="absolute rounded-full" style={{ width: d.s * 0.85, height: d.s * 0.24, background: "rgba(90,60,30,0.18)", left: "50%", top: d.s * 0.42, transform: "translateX(-50%)", filter: "blur(2px)" }} />}
-                <span style={{ display: "inline-block", fontSize: d.s, transformOrigin: "bottom center", animation: a ? `${a} ${d.dur}s ease-in-out infinite` : undefined, animationDelay: d.delay + "s" }}>{d.e}</span>
-              </div>
-            );
-          })}
-
-          {!loading && visibleBottles.map((b) => {
-            const color = BOTTLE_COLORS[b.colorIndex] || BOTTLE_COLORS[0];
-            const total = Object.values(b.reactions || {}).reduce((a, c) => a + c, 0);
-            const mine = b.ownerId && b.ownerId === myId;
-            const cat = b.category && b.category !== "none" ? catOf(b.category) : null;
+      `
+    }), intro && /*#__PURE__*/_jsxs("div", {
+      className: "fixed inset-0 overflow-hidden",
+      style: {
+        zIndex: 70
+      },
+      children: [/*#__PURE__*/_jsx(IntroBeach, {}), /*#__PURE__*/_jsx("div", {
+        className: "absolute inset-0 transition-all duration-700",
+        style: {
+          background: introStep === "letter" ? "rgba(10,40,60,0.58)" : introStep === "pop" ? "rgba(10,40,60,0.22)" : "rgba(10,40,60,0)"
+        }
+      }), introStep === "beach" && /*#__PURE__*/_jsx("div", {
+        className: "absolute top-6 left-1/2 -translate-x-1/2 bg-white/85 text-teal-800 text-sm px-4 py-2 rounded-full shadow",
+        style: {
+          animation: "fadeup .6s ease both"
+        },
+        children: "🚶 해변을 거니는 중… 저 멀리 무언가 떠밀려 와요 🌊"
+      }), introStep === "bottle" && /*#__PURE__*/_jsxs("div", {
+        className: "absolute inset-0 flex flex-col items-center justify-center",
+        style: {
+          animation: "fadeup .7s ease both"
+        },
+        children: [/*#__PURE__*/_jsx("div", {
+          className: "absolute inset-0",
+          style: {
+            background: "radial-gradient(ellipse 62% 56% at 50% 52%, rgba(6,28,46,0.55) 0%, rgba(6,28,46,0.22) 45%, rgba(6,28,46,0) 70%)"
+          }
+        }), /*#__PURE__*/_jsxs("div", {
+          className: "relative flex flex-col items-center",
+          children: [/*#__PURE__*/_jsxs("div", {
+            className: "relative",
+            children: [/*#__PURE__*/_jsx("div", {
+              className: "absolute left-1/2 top-1/2 rounded-full",
+              style: {
+                width: 230,
+                height: 230,
+                transform: "translate(-50%,-50%)",
+                background: "radial-gradient(circle, rgba(255,250,225,0.6) 0%, rgba(255,250,225,0) 70%)"
+              }
+            }), /*#__PURE__*/_jsx("button", {
+              onClick: () => setIntroStep("pop"),
+              className: "relative bob focus:outline-none active:scale-95 transition",
+              style: {
+                animationDuration: "4s",
+                filter: "drop-shadow(0 10px 12px rgba(0,0,0,0.35))"
+              },
+              children: /*#__PURE__*/_jsx(Bottle, {
+                color: BOTTLE_COLORS[0],
+                scale: 1.7
+              })
+            })]
+          }), /*#__PURE__*/_jsx("p", {
+            className: "mt-7 text-white text-lg",
+            style: {
+              animation: "fadeup .6s ease both",
+              animationDelay: ".3s",
+              textShadow: "0 2px 10px rgba(0,0,0,0.65)"
+            },
+            children: "유리병 편지가 떠밀려 왔어요"
+          }), /*#__PURE__*/_jsx("p", {
+            className: "mt-1 text-white text-sm animate-pulse",
+            style: {
+              textShadow: "0 2px 8px rgba(0,0,0,0.65)"
+            },
+            children: "👆 톡 눌러 열어보세요"
+          })]
+        })]
+      }), introStep === "pop" && /*#__PURE__*/_jsx("div", {
+        className: "absolute inset-0 flex items-center justify-center",
+        children: /*#__PURE__*/_jsxs("div", {
+          className: "relative flex flex-col items-center",
+          children: [/*#__PURE__*/_jsx("div", {
+            className: "absolute left-1/2 z-10",
+            style: {
+              top: "10px",
+              animation: `${ANIM_PRESETS[1].cork} ${ANIM_PRESETS[1].dur}s ease-out forwards`
+            },
+            children: /*#__PURE__*/_jsx("div", {
+              className: "w-8 h-8 bg-amber-600 rounded-lg border-2 border-amber-700 shadow-lg"
+            })
+          }), /*#__PURE__*/_jsx("div", {
+            className: "absolute left-1/2 z-20 text-3xl text-white drop-shadow",
+            style: {
+              top: "-12px",
+              animation: `poptext ${(ANIM_PRESETS[1].dur + 0.1).toFixed(2)}s ease-out forwards`
+            },
+            children: "뿅!"
+          }), ANIM_PRESETS[1].sparkles.map((s, i) => /*#__PURE__*/_jsx("div", {
+            className: "absolute left-1/2 top-8 text-2xl z-10",
+            style: {
+              "--end": s.end,
+              animation: `sparklefly ${ANIM_PRESETS[1].dur}s ease-out forwards`,
+              animationDelay: `${i * 0.04}s`
+            },
+            children: s.e
+          }, "is" + i)), ANIM_PRESETS[1].droplets.map((d, i) => /*#__PURE__*/_jsx("div", {
+            className: "absolute left-1/2 top-12 w-3.5 h-3.5 rounded-full bg-cyan-300/90 border border-cyan-100 z-10",
+            style: {
+              "--dend": d.end,
+              animation: `dropletfly ${ANIM_PRESETS[1].dur}s ease-in forwards`,
+              animationDelay: `${d.d}s`
+            }
+          }, "id" + i)), /*#__PURE__*/_jsx("div", {
+            style: {
+              animation: `bottlewiggle ${ANIM_PRESETS[1].dur}s ease-in-out`
+            },
+            children: /*#__PURE__*/_jsx(Bottle, {
+              color: BOTTLE_COLORS[0],
+              scale: 1.9,
+              showCork: false
+            })
+          })]
+        })
+      }), introStep === "letter" && /*#__PURE__*/_jsxs("div", {
+        className: "absolute inset-0 overflow-y-auto flex flex-col items-center justify-center px-6 py-12 text-center",
+        children: [/*#__PURE__*/_jsx("div", {
+          className: "w-full max-w-md text-left",
+          style: {
+            animation: "fadeup .6s ease both"
+          },
+          children: /*#__PURE__*/_jsxs("div", {
+            className: "relative rounded-2xl px-7 py-7 shadow-2xl border border-amber-200",
+            style: {
+              transform: "rotate(-1deg)",
+              fontFamily: "'Gaegu', cursive",
+              backgroundColor: "#fffdf3",
+              backgroundImage: "repeating-linear-gradient(transparent, transparent 35px, #ecdfbe 36px)"
+            },
+            children: [/*#__PURE__*/_jsx("div", {
+              className: "absolute -top-3 -right-2 text-3xl",
+              style: {
+                transform: "rotate(12deg)"
+              },
+              children: "🍶"
+            }), /*#__PURE__*/_jsxs("p", {
+              style: {
+                fontSize: "19px",
+                lineHeight: "36px",
+                color: "#3a2f23"
+              },
+              children: ["GNA 해변에 온 걸 환영해요. 새로운 표류자.", /*#__PURE__*/_jsx("br", {}), /*#__PURE__*/_jsx("br", {}), "이 편지를 발견했다는 건, 당신도 이제 이 해변의 비밀을 알아버렸다는 뜻이겠죠? 여기엔 동료들이 슬쩍 띄워둔 취향이 유리병에 담겨 떠다닌답니다.", /*#__PURE__*/_jsx("br", {}), /*#__PURE__*/_jsx("br", {}), "아끼는 콘텐츠(영화, 드라마 등), 혼자 알기 아까운 서초구 맛집, GNA Life 꿀팁... 유리병의 코르크를 ", /*#__PURE__*/_jsx("b", {
+                children: "뿅!"
+              }), " 열면 누군가의 취향 한 장이 펼쳐질 거에요.", /*#__PURE__*/_jsx("br", {}), /*#__PURE__*/_jsx("br", {}), "그러니 천천히 거닐고, 줍고, 열어보고.. 떠나기 전엔 당신의 유리병도 띄워두고 가주세요. 다음 표류자를 위해...", /*#__PURE__*/_jsx("br", {}), /*#__PURE__*/_jsx("br", {}), "당신의 작은 이야기가 누군가에게는 큰 위로가 될지도 모르니까요. 🐚"]
+            })]
+          })
+        }), /*#__PURE__*/_jsx("button", {
+          onClick: () => setIntro(false),
+          className: "mt-6 bg-teal-500 hover:bg-teal-600 active:scale-95 transition text-white text-lg px-8 py-3.5 rounded-full shadow-xl border-2 border-teal-600",
+          style: {
+            animation: "fadeup .5s ease both",
+            animationDelay: ".5s"
+          },
+          children: "🏖️ 해변으로 들어가기"
+        })]
+      })]
+    }), /*#__PURE__*/_jsxs("div", {
+      className: "bg-gradient-to-b from-sky-300 to-sky-200 pt-6 pb-3 px-4 text-center relative overflow-hidden",
+      children: [/*#__PURE__*/_jsx("div", {
+        className: "absolute top-4 left-8 w-20 h-7 bg-white/70 rounded-full blur-[1px]"
+      }), /*#__PURE__*/_jsx("div", {
+        className: "absolute top-7 right-12 w-24 h-8 bg-white/70 rounded-full blur-[1px]"
+      }), /*#__PURE__*/_jsx("h1", {
+        className: "relative text-2xl sm:text-3xl text-white drop-shadow-[0_2px_0_rgba(95,184,163,0.6)]",
+        children: "🏝️ GNA 유리병 편지"
+      }), /*#__PURE__*/_jsx("p", {
+        className: "relative mt-1 text-xs sm:text-sm text-teal-800/80",
+        children: "해변을 끌어서 둘러보고, 마음에 드는 유리병을 열어보세요 🍶"
+      })]
+    }), /*#__PURE__*/_jsxs("div", {
+      className: "bg-sky-100 px-3 py-2 flex gap-2 overflow-x-auto nobar",
+      style: {
+        scrollbarWidth: "none"
+      },
+      children: [/*#__PURE__*/_jsx("button", {
+        onClick: () => setFilter("all"),
+        className: `flex items-center gap-1 px-3 py-1.5 rounded-full text-sm border-2 shrink-0 transition ${filter === "all" ? "text-white border-teal-500" : "bg-white text-stone-500 border-stone-200"}`,
+        style: filter === "all" ? {
+          background: "#14b8a6"
+        } : undefined,
+        children: "🌊 전체"
+      }), CATEGORIES.map(c => {
+        const active = filter === c.key;
+        return /*#__PURE__*/_jsxs("button", {
+          onClick: () => setFilter(c.key),
+          className: `flex items-center gap-1 px-3 py-1.5 rounded-full text-sm border-2 shrink-0 transition ${active ? "text-white" : "bg-white text-stone-500 border-stone-200"}`,
+          style: active ? {
+            background: c.color,
+            borderColor: c.color
+          } : undefined,
+          children: [c.icon, " ", c.label]
+        }, c.key);
+      })]
+    }), /*#__PURE__*/_jsxs("div", {
+      ref: vpRef,
+      onPointerDown: onPanStart,
+      onWheel: onWheel,
+      className: "relative overflow-hidden bg-cyan-200",
+      style: {
+        height: "70vh",
+        cursor: drag.current.on ? "grabbing" : "grab",
+        touchAction: "none"
+      },
+      children: [/*#__PURE__*/_jsxs("div", {
+        className: "absolute top-0 left-0",
+        style: {
+          width: WORLD_W,
+          height: WORLD_H,
+          transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
+          transformOrigin: "0 0"
+        },
+        children: [/*#__PURE__*/_jsx("div", {
+          className: "absolute inset-0",
+          style: {
+            background: "linear-gradient(to bottom,#fdebc8,#f3d9a8)"
+          }
+        }), /*#__PURE__*/_jsxs("div", {
+          className: "absolute top-0 left-0 right-0",
+          style: {
+            height: SEA_H,
+            background: "linear-gradient(to bottom,#2da7bd 0%,#5fc8d6 50%,#9fe0e4 100%)"
+          },
+          children: [/*#__PURE__*/_jsx("div", {
+            className: "absolute inset-0",
+            style: {
+              backgroundImage: "radial-gradient(circle at 15px 0, transparent 10px, rgba(255,255,255,0.5) 11px, transparent 12px)",
+              backgroundSize: "30px 20px",
+              animation: "wave 3s linear infinite"
+            }
+          }), /*#__PURE__*/_jsx("div", {
+            className: "absolute inset-0",
+            style: {
+              backgroundImage: "radial-gradient(circle at 30px 10px, transparent 8px, rgba(255,255,255,0.28) 9px, transparent 10px)",
+              backgroundSize: "54px 34px",
+              animation: "wave 5s linear infinite reverse"
+            }
+          }), /*#__PURE__*/_jsx("div", {
+            className: "absolute inset-0",
+            style: {
+              backgroundImage: "repeating-linear-gradient(115deg, transparent 0 42px, rgba(255,255,255,0.14) 42px 48px, transparent 48px 96px)",
+              animation: "shimmer 5s ease-in-out infinite"
+            }
+          })]
+        }), /*#__PURE__*/_jsx("div", {
+          className: "absolute left-0",
+          style: {
+            top: SEA_H - 110,
+            width: WORLD_W + 140,
+            height: 14,
+            pointerEvents: "none",
+            animation: "seacrest 6s linear infinite",
+            background: "repeating-linear-gradient(90deg, transparent 0 60px, rgba(255,255,255,0.45) 60px 78px, transparent 78px 140px)",
+            borderRadius: 20,
+            filter: "blur(1px)"
+          }
+        }), /*#__PURE__*/_jsx("div", {
+          className: "absolute left-0",
+          style: {
+            top: SEA_H - 70,
+            width: WORLD_W + 140,
+            height: 12,
+            pointerEvents: "none",
+            animation: "seacrest 4.5s linear infinite",
+            background: "repeating-linear-gradient(90deg, transparent 0 80px, rgba(255,255,255,0.4) 80px 96px, transparent 96px 170px)",
+            borderRadius: 20,
+            filter: "blur(1px)"
+          }
+        }), /*#__PURE__*/_jsxs("svg", {
+          viewBox: "0 0 1200 100",
+          preserveAspectRatio: "none",
+          width: "100%",
+          height: "120",
+          style: {
+            position: "absolute",
+            left: 0,
+            top: SEA_H - 6,
+            pointerEvents: "none"
+          },
+          children: [/*#__PURE__*/_jsx("defs", {
+            children: /*#__PURE__*/_jsxs("linearGradient", {
+              id: "shorewater",
+              x1: "0",
+              y1: "0",
+              x2: "0",
+              y2: "1",
+              children: [/*#__PURE__*/_jsx("stop", {
+                offset: "0%",
+                stopColor: "#9fe0e4"
+              }), /*#__PURE__*/_jsx("stop", {
+                offset: "100%",
+                stopColor: "#bdeaec"
+              })]
+            })
+          }), /*#__PURE__*/_jsx("path", {
+            d: "M0,0 L1200,0 L1200,58 C1090,84 980,40 870,60 C760,80 650,42 540,62 C430,82 320,42 210,62 C120,78 40,48 0,58 Z",
+            fill: "url(#shorewater)"
+          })]
+        }), /*#__PURE__*/_jsxs("div", {
+          className: "absolute left-0 right-0",
+          style: {
+            top: SEA_H - 60,
+            height: 160,
+            pointerEvents: "none"
+          },
+          children: [/*#__PURE__*/_jsx("svg", {
+            viewBox: "0 0 1200 120",
+            preserveAspectRatio: "none",
+            width: "100%",
+            height: "160",
+            style: {
+              position: "absolute",
+              left: 0,
+              top: 0,
+              animation: "washB 8s ease-in-out infinite"
+            },
+            children: /*#__PURE__*/_jsx("path", {
+              d: "M0,66 C120,40 240,90 360,66 C480,40 600,90 720,66 C840,40 960,90 1080,66 C1140,54 1200,72 1200,68 L1200,120 L0,120 Z",
+              fill: "rgba(150,216,226,0.45)"
+            })
+          }), /*#__PURE__*/_jsxs("svg", {
+            viewBox: "0 0 1200 120",
+            preserveAspectRatio: "none",
+            width: "100%",
+            height: "160",
+            style: {
+              position: "absolute",
+              left: 0,
+              top: 0,
+              animation: "washF 4.8s ease-in-out infinite"
+            },
+            children: [/*#__PURE__*/_jsx("defs", {
+              children: /*#__PURE__*/_jsxs("linearGradient", {
+                id: "foamblue",
+                x1: "0",
+                y1: "0",
+                x2: "0",
+                y2: "1",
+                children: [/*#__PURE__*/_jsx("stop", {
+                  offset: "0%",
+                  stopColor: "rgba(120,210,228,0.7)"
+                }), /*#__PURE__*/_jsx("stop", {
+                  offset: "55%",
+                  stopColor: "rgba(74,184,210,0.5)"
+                }), /*#__PURE__*/_jsx("stop", {
+                  offset: "100%",
+                  stopColor: "rgba(54,162,192,0.18)"
+                })]
+              })
+            }), /*#__PURE__*/_jsx("path", {
+              d: "M0,58 C100,26 200,90 300,58 C400,26 500,90 600,58 C700,26 800,90 900,58 C1000,26 1100,90 1200,58 L1200,120 L0,120 Z",
+              fill: "url(#foamblue)"
+            })]
+          }), /*#__PURE__*/_jsx("svg", {
+            viewBox: "0 0 1200 120",
+            preserveAspectRatio: "none",
+            width: "100%",
+            height: "160",
+            style: {
+              position: "absolute",
+              left: 0,
+              top: 0,
+              animation: "washF 4.8s ease-in-out infinite"
+            },
+            children: /*#__PURE__*/_jsx("path", {
+              d: "M0,60 C100,28 200,92 300,60 C400,28 500,92 600,60 C700,28 800,92 900,60 C1000,28 1100,92 1200,60 L1200,76 C1100,108 1000,44 900,76 C800,108 700,44 600,76 C500,108 400,44 300,76 C200,108 100,44 0,76 Z",
+              fill: "rgba(40,130,162,0.4)"
+            })
+          }), /*#__PURE__*/_jsx("svg", {
+            viewBox: "0 0 1200 120",
+            preserveAspectRatio: "none",
+            width: "100%",
+            height: "160",
+            style: {
+              position: "absolute",
+              left: 0,
+              top: 0,
+              animation: "washF 4.8s ease-in-out infinite"
+            },
+            children: /*#__PURE__*/_jsx("path", {
+              d: "M0,52 C100,20 200,84 300,52 C400,20 500,84 600,52 C700,20 800,84 900,52 C1000,20 1100,84 1200,52 L1200,70 C1100,102 1000,38 900,70 C800,102 700,38 600,70 C500,102 400,38 300,70 C200,102 100,38 0,70 Z",
+              fill: "rgba(255,255,255,0.92)"
+            })
+          })]
+        }), /*#__PURE__*/_jsx("div", {
+          className: "absolute rounded-full bg-cyan-200/50 blur-md",
+          style: {
+            left: 420,
+            top: 820,
+            width: 200,
+            height: 76
+          }
+        }), /*#__PURE__*/_jsx("div", {
+          className: "absolute rounded-full bg-cyan-200/50 blur-md",
+          style: {
+            left: 1300,
+            top: 640,
+            width: 160,
+            height: 64
+          }
+        }), footprints.map((f, i) => /*#__PURE__*/_jsx("div", {
+          className: "absolute rounded-full",
+          style: {
+            left: f.x,
+            top: f.y,
+            width: 9,
+            height: 13,
+            background: "rgba(120,80,40,0.13)",
+            transform: `translate(-50%,-50%) rotate(${f.a}deg)`
+          }
+        }, "fp" + i)), decor.map((d, i) => {
+          const a = decorAnim(d.e);
+          return /*#__PURE__*/_jsxs("div", {
+            className: "absolute",
+            style: {
+              left: d.x,
+              top: d.y,
+              transform: "translate(-50%,-50%)"
+            },
+            children: [!d.water && /*#__PURE__*/_jsx("div", {
+              className: "absolute rounded-full",
+              style: {
+                width: d.s * 0.85,
+                height: d.s * 0.24,
+                background: "rgba(90,60,30,0.18)",
+                left: "50%",
+                top: d.s * 0.42,
+                transform: "translateX(-50%)",
+                filter: "blur(2px)"
+              }
+            }), /*#__PURE__*/_jsx("span", {
+              style: {
+                display: "inline-block",
+                fontSize: d.s,
+                transformOrigin: "bottom center",
+                animation: a ? `${a} ${d.dur}s ease-in-out infinite` : undefined,
+                animationDelay: d.delay + "s"
+              },
+              children: d.e
+            })]
+          }, i);
+        }), !loading && visibleBottles.map(b => {
+          const color = BOTTLE_COLORS[b.colorIndex] || BOTTLE_COLORS[0];
+          const total = Object.values(b.reactions || {}).reduce((a, c) => a + c, 0);
+          const mine = b.ownerId && b.ownerId === myId;
+          const cat = b.category && b.category !== "none" ? catOf(b.category) : null;
+          const p = getPos(b);
+          return /*#__PURE__*/_jsxs("button", {
+            onClick: () => handleBottleClick(b),
+            className: "group absolute flex flex-col items-center focus:outline-none",
+            style: {
+              left: p.x,
+              top: p.y,
+              transform: "translate(-50%,-50%)",
+              width: 110
+            },
+            children: [/*#__PURE__*/_jsxs("div", {
+              className: "relative bob transition-transform group-hover:scale-110",
+              style: {
+                animationDelay: `${b.bob}s`,
+                transform: `rotate(${b.tilt}deg)`
+              },
+              children: [/*#__PURE__*/_jsx("div", {
+                className: "absolute rounded-full",
+                style: {
+                  width: 50,
+                  height: 12,
+                  background: "rgba(90,60,30,0.16)",
+                  left: "50%",
+                  bottom: -4,
+                  transform: "translateX(-50%)",
+                  filter: "blur(2px)"
+                }
+              }), /*#__PURE__*/_jsx(Bottle, {
+                color: color,
+                scale: 0.9
+              })]
+            }), /*#__PURE__*/_jsxs("div", {
+              className: "-mt-1 max-w-full px-3 py-1.5 rounded-2xl shadow-md border-2 flex items-center gap-1",
+              style: {
+                background: "#eef0ed",
+                borderColor: cat ? cat.color : "#b6bbb4"
+              },
+              children: [mine && /*#__PURE__*/_jsx("span", {
+                className: "text-[10px]",
+                children: "📌"
+              }), /*#__PURE__*/_jsx("p", {
+                className: "text-[12px] leading-tight truncate max-w-[88px]",
+                style: {
+                  color: "#4a4a46"
+                },
+                children: b.theme
+              })]
+            }), total > 0 && /*#__PURE__*/_jsxs("span", {
+              className: "mt-1 text-[11px] text-amber-800/80 bg-white/60 rounded-full px-1.5",
+              children: ["💌 ", total]
+            })]
+          }, b.id);
+        })]
+      }), loading ? /*#__PURE__*/_jsx("div", {
+        className: "absolute inset-0 flex items-center justify-center text-amber-800/70",
+        children: "모래사장을 둘러보는 중... 🐾"
+      }) : bottles.length === 0 ? /*#__PURE__*/_jsxs("div", {
+        className: "absolute inset-0 flex flex-col items-center justify-center pointer-events-none",
+        children: [/*#__PURE__*/_jsx("div", {
+          className: "text-5xl mb-2",
+          children: "🍶"
+        }), /*#__PURE__*/_jsx("p", {
+          className: "text-amber-900/80",
+          children: "아직 해변에 유리병이 없어요!"
+        }), /*#__PURE__*/_jsx("p", {
+          className: "text-amber-800/60 text-sm mt-1",
+          children: "아래 버튼으로 첫 편지를 띄워보세요 ✨"
+        })]
+      }) : filter !== "all" && visibleBottles.length === 0 && /*#__PURE__*/_jsxs("div", {
+        className: "absolute inset-0 flex flex-col items-center justify-center pointer-events-none",
+        children: [/*#__PURE__*/_jsx("div", {
+          className: "text-4xl mb-2",
+          children: catOf(filter)?.icon
+        }), /*#__PURE__*/_jsx("p", {
+          className: "text-amber-900/80",
+          children: "이 주제의 유리병이 아직 없어요"
+        })]
+      }), hint && bottles.length > 0 && /*#__PURE__*/_jsx("div", {
+        className: "absolute top-3 left-1/2 -translate-x-1/2 bg-white/85 text-amber-800 text-xs px-3 py-1.5 rounded-full shadow pointer-events-none",
+        style: {
+          animation: "fadehint 5s ease forwards"
+        },
+        children: "✋ 끌어서 해변을 둘러보세요"
+      }), /*#__PURE__*/_jsx("div", {
+        className: "absolute top-3 right-3 z-10 bg-white/85 rounded-xl shadow-lg border border-teal-100 p-1.5",
+        onPointerDown: e => {
+          e.stopPropagation();
+          mmPressed.current = true;
+          e.currentTarget.setPointerCapture(e.pointerId);
+          mmJump(e);
+        },
+        onPointerMove: e => {
+          if (mmPressed.current) {
+            e.stopPropagation();
+            mmJump(e);
+          }
+        },
+        onPointerUp: () => {
+          mmPressed.current = false;
+        },
+        style: {
+          touchAction: "none"
+        },
+        children: /*#__PURE__*/_jsxs("div", {
+          className: "relative overflow-hidden rounded-md cursor-pointer",
+          style: {
+            width: mmW,
+            height: mmH,
+            background: "linear-gradient(to bottom,#fdebc8,#f3d9a8)"
+          },
+          children: [/*#__PURE__*/_jsx("div", {
+            className: "absolute top-0 left-0 right-0",
+            style: {
+              height: SEA_H * ms,
+              background: "#8fd9e0"
+            }
+          }), decor.map((d, i) => /*#__PURE__*/_jsx("div", {
+            className: "absolute rounded-full bg-emerald-600/30",
+            style: {
+              left: d.x * ms - 1,
+              top: d.y * ms - 1,
+              width: 2,
+              height: 2
+            }
+          }, "md" + i)), visibleBottles.map(b => {
             const p = getPos(b);
-            return (
-              <button key={b.id} onClick={() => handleBottleClick(b)} className="group absolute flex flex-col items-center focus:outline-none" style={{ left: p.x, top: p.y, transform: "translate(-50%,-50%)", width: 110 }}>
-                <div className="relative bob transition-transform group-hover:scale-110" style={{ animationDelay: `${b.bob}s`, transform: `rotate(${b.tilt}deg)` }}>
-                  <div className="absolute rounded-full" style={{ width: 50, height: 12, background: "rgba(90,60,30,0.16)", left: "50%", bottom: -4, transform: "translateX(-50%)", filter: "blur(2px)" }} />
-                  <Bottle color={color} scale={0.9} />
-                </div>
-                <div className="-mt-1 max-w-full px-3 py-1.5 rounded-2xl shadow-md border-2 flex items-center gap-1" style={{ background: "#eef0ed", borderColor: cat ? cat.color : "#b6bbb4" }}>
-                  {mine && <span className="text-[10px]">📌</span>}
-                  <p className="text-[12px] leading-tight truncate max-w-[88px]" style={{ color: "#4a4a46" }}>{b.theme}</p>
-                </div>
-                {total > 0 && <span className="mt-1 text-[11px] text-amber-800/80 bg-white/60 rounded-full px-1.5">💌 {total}</span>}
-              </button>
-            );
-          })}
-        </div>
-
-        {loading ? (
-          <div className="absolute inset-0 flex items-center justify-center text-amber-800/70">모래사장을 둘러보는 중... 🐾</div>
-        ) : (
-          bottles.length === 0 ? (
-            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-              <div className="text-5xl mb-2">🍶</div>
-              <p className="text-amber-900/80">아직 해변에 유리병이 없어요!</p>
-              <p className="text-amber-800/60 text-sm mt-1">아래 버튼으로 첫 편지를 띄워보세요 ✨</p>
-            </div>
-          ) : (
-            filter !== "all" && visibleBottles.length === 0 && (
-              <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                <div className="text-4xl mb-2">{catOf(filter)?.icon}</div>
-                <p className="text-amber-900/80">이 주제의 유리병이 아직 없어요</p>
-              </div>
-            )
-          )
-        )}
-
-        {hint && bottles.length > 0 && (
-          <div className="absolute top-3 left-1/2 -translate-x-1/2 bg-white/85 text-amber-800 text-xs px-3 py-1.5 rounded-full shadow pointer-events-none" style={{ animation: "fadehint 5s ease forwards" }}>✋ 끌어서 해변을 둘러보세요</div>
-        )}
-
-        <div className="absolute top-3 right-3 z-10 bg-white/85 rounded-xl shadow-lg border border-teal-100 p-1.5" onPointerDown={(e) => { e.stopPropagation(); mmPressed.current = true; e.currentTarget.setPointerCapture(e.pointerId); mmJump(e); }} onPointerMove={(e) => { if (mmPressed.current) { e.stopPropagation(); mmJump(e); } }} onPointerUp={() => { mmPressed.current = false; }} style={{ touchAction: "none" }}>
-          <div className="relative overflow-hidden rounded-md cursor-pointer" style={{ width: mmW, height: mmH, background: "linear-gradient(to bottom,#fdebc8,#f3d9a8)" }}>
-            <div className="absolute top-0 left-0 right-0" style={{ height: SEA_H * ms, background: "#8fd9e0" }} />
-            {decor.map((d, i) => (<div key={"md" + i} className="absolute rounded-full bg-emerald-600/30" style={{ left: d.x * ms - 1, top: d.y * ms - 1, width: 2, height: 2 }} />))}
-            {visibleBottles.map((b) => {
-              const p = getPos(b);
-              const cat = b.category && b.category !== "none" ? catOf(b.category) : null;
-              const col = cat ? cat.color : (BOTTLE_COLORS[b.colorIndex] || BOTTLE_COLORS[0]).dark;
-              return <div key={"mb" + b.id} className="absolute rounded-full border border-white" style={{ left: p.x * ms - 2.5, top: p.y * ms - 2.5, width: 5, height: 5, background: col }} />;
-            })}
-            <div className="absolute border-2 border-rose-400 rounded-sm bg-rose-200/20" style={{ left: Math.max(0, mmView.left), top: Math.max(0, mmView.top), width: Math.min(mmW, mmView.w), height: Math.min(mmH, mmView.h) }} />
-          </div>
-        </div>
-
-        <div className="absolute bottom-4 right-4 z-10 flex flex-col gap-2">
-          <button onClick={refreshBottles} className={ctrlBtn} title="새로고침"><RefreshCw size={18} /></button>
-          <button onClick={toggleSound} className={ctrlBtn} title="파도 소리">{soundOn ? <Volume2 size={18} /> : <VolumeX size={18} />}</button>
-          <button onClick={() => setZoomAround(Math.min(maxZoom, +(zoom + 0.15).toFixed(2)))} className={ctrlBtn} title="확대"><ZoomIn size={18} /></button>
-          <button onClick={() => setZoomAround(Math.max(minZoom, +(zoom - 0.15).toFixed(2)))} className={ctrlBtn} title="축소"><ZoomOut size={18} /></button>
-          <button onClick={recenter} className={ctrlBtn} title="가운데로"><Compass size={18} /></button>
-        </div>
-      </div>
-
-      <button onClick={openCreate} style={{ bottom: "calc(2.25rem + env(safe-area-inset-bottom))" }} className="fixed left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 bg-teal-500 hover:bg-teal-600 active:scale-95 transition text-white px-6 py-3.5 rounded-full shadow-xl border-2 border-teal-600 text-lg">
-        <Plus size={20} strokeWidth={3} /> 유리병 띄우기
-      </button>
-
-      {opening && openAnim && (
-        <div className="fixed inset-0 z-40 bg-sky-900/30 backdrop-blur-[2px] flex items-center justify-center">
-          <div className="relative flex flex-col items-center">
-            <div className="absolute left-1/2 z-10" style={{ top: "10px", animation: `${openAnim.cork} ${openAnim.dur}s ease-out forwards` }}><div className="w-7 h-7 bg-amber-600 rounded-lg border-2 border-amber-700 shadow-lg" /></div>
-            <div className="absolute left-1/2 z-20 text-2xl text-white drop-shadow" style={{ top: "-10px", animation: `poptext ${(openAnim.dur + 0.1).toFixed(2)}s ease-out forwards` }}>뽕!</div>
-            {openAnim.sparkles.map((s, i) => (<div key={"s" + i} className="absolute left-1/2 top-6 text-xl z-10" style={{ "--end": s.end, animation: `sparklefly ${openAnim.dur}s ease-out forwards`, animationDelay: `${i * 0.04}s` }}>{s.e}</div>))}
-            {openAnim.droplets.map((d, i) => (<div key={"d" + i} className="absolute left-1/2 top-10 w-3 h-3 rounded-full bg-cyan-300/90 border border-cyan-100 z-10" style={{ "--dend": d.end, animation: `dropletfly ${openAnim.dur}s ease-in forwards`, animationDelay: `${d.d}s` }} />))}
-            <div style={{ animation: `bottlewiggle ${openAnim.dur}s ease-in-out` }}><Bottle color={BOTTLE_COLORS[opening.colorIndex] || BOTTLE_COLORS[0]} scale={1.7} showCork={false} /></div>
-          </div>
-        </div>
-      )}
-
-      {selected && (
-        <div className="fixed inset-0 z-30 bg-black/40 flex items-end sm:items-center justify-center p-0 sm:p-4" onClick={() => setSelectedId(null)}>
-          <div className="pop w-full sm:max-w-md max-h-[88vh] overflow-y-auto rounded-t-3xl sm:rounded-3xl shadow-2xl border-t-4 sm:border-4 border-amber-200" style={{ backgroundColor: "#fffdf7" }} onClick={(e) => e.stopPropagation()}>
-            <div className="sticky top-0 bg-amber-700 px-5 py-3 flex items-center justify-between rounded-t-3xl sm:rounded-t-2xl">
-              <div className="flex items-center gap-2 min-w-0">
-                <span className="text-lg">{selected.category && selected.category !== "none" ? catOf(selected.category)?.icon : "🍶"}</span>
-                <h2 className="text-lg text-amber-50 truncate">{selected.theme}</h2>
-              </div>
-              <button onClick={() => setSelectedId(null)} className="text-amber-100 hover:text-white"><X size={22} /></button>
-            </div>
-            <div className="p-5">
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2">
-                  <p className="text-sm text-amber-800">✍️ {selected.nickname}</p>
-                  {selected.category && selected.category !== "none" && (
-                    <span className="text-[11px] text-white px-2 py-0.5 rounded-full" style={{ background: catOf(selected.category)?.color }}>{catOf(selected.category)?.icon} {catOf(selected.category)?.label}</span>
-                  )}
-                </div>
-                {selected.ownerId === myId && (
-                  <div className="flex items-center gap-1">
-                    <button onClick={() => openEdit(selected)} className="flex items-center gap-1 text-xs text-teal-600 bg-teal-50 hover:bg-teal-100 px-2.5 py-1 rounded-full border border-teal-200"><Pencil size={12} /> 수정</button>
-                    <button onClick={() => setConfirmDelete(true)} className="flex items-center gap-1 text-xs text-rose-500 bg-rose-50 hover:bg-rose-100 px-2.5 py-1 rounded-full border border-rose-200"><Trash2 size={12} /> 삭제</button>
-                  </div>
-                )}
-              </div>
-              {confirmDelete && selected.ownerId === myId && (
-                <div className="mb-3 bg-rose-50 border border-rose-200 rounded-2xl p-3 text-center">
-                  <p className="text-sm text-rose-600 mb-2">이 유리병을 정말 떠나보낼까요? 🌊</p>
-                  <div className="flex gap-2 justify-center">
-                    <button onClick={() => deleteBottle(selected)} className="px-4 py-1.5 rounded-full bg-rose-500 text-white text-sm hover:bg-rose-600">삭제하기</button>
-                    <button onClick={() => setConfirmDelete(false)} className="px-4 py-1.5 rounded-full bg-white text-stone-500 text-sm border border-stone-200">취소</button>
-                  </div>
-                </div>
-              )}
-              <div className="bg-amber-50/70 border border-amber-100 rounded-2xl p-4 mb-5"><div className="whitespace-pre-wrap text-[16px] leading-8 text-stone-800">{selected.items}</div></div>
-              <div className="flex flex-wrap gap-2 mb-5">
-                {REACTIONS.map((r) => {
-                  const active = !!myReactions[selected.id + ":" + r.key];
-                  const count = (selected.reactions && selected.reactions[r.key]) || 0;
-                  return (<button key={r.key} onClick={() => toggleReaction(selected, r.key)} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border-2 text-sm transition active:scale-90 ${active ? "bg-teal-100 border-teal-400 text-teal-700" : "bg-white border-amber-200 text-stone-500 hover:border-amber-300"}`}><span className="text-base">{r.emoji}</span><span>{count}</span></button>);
-                })}
-              </div>
-              <div className="border-t-2 border-dashed border-amber-200 pt-4">
-                <p className="text-sm text-amber-800 mb-3 flex items-center gap-1">💬 댓글 {(selected.comments || []).length}</p>
-                <div className="space-y-2 mb-3">
-                  {(selected.comments || []).length === 0 && <p className="text-xs text-stone-400 italic">아직 댓글이 없어요. 첫 반응을 남겨보세요!</p>}
-                  {(selected.comments || []).map((c, i) => (<div key={i} className="bg-amber-50 rounded-2xl px-3 py-2 border border-amber-100"><p className="text-[12px] text-teal-600">{c.nickname}</p><p className="text-sm text-stone-800">{c.text}</p></div>))}
-                </div>
-                <input value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder="닉네임 (비우면 익명)" className="w-full mb-2 px-3 py-2 rounded-xl border-2 border-amber-200 bg-white text-sm text-stone-800 focus:outline-none focus:border-teal-400" />
-                <div className="flex gap-2">
-                  <input value={commentText} onChange={(e) => setCommentText(e.target.value)} onKeyDown={(e) => e.key === "Enter" && addComment(selected)} placeholder="따뜻한 한마디 남기기..." className="flex-1 px-3 py-2 rounded-xl border-2 border-amber-200 bg-white text-sm text-stone-800 focus:outline-none focus:border-teal-400" />
-                  <button onClick={() => addComment(selected)} className="bg-teal-500 hover:bg-teal-600 active:scale-90 transition text-white px-3 rounded-xl"><Send size={18} /></button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {creating && (
-        <div className="fixed inset-0 z-50 bg-black/40 flex items-end sm:items-center justify-center p-0 sm:p-4" onClick={() => setCreating(false)}>
-          <div className="pop bg-white w-full sm:max-w-md max-h-[90vh] overflow-y-auto rounded-t-3xl sm:rounded-3xl shadow-2xl border-t-4 sm:border-4 border-teal-200" onClick={(e) => e.stopPropagation()}>
-            <div className="sticky top-0 bg-teal-500 px-5 py-3 flex items-center justify-between rounded-t-3xl sm:rounded-t-2xl">
-              <h2 className="text-lg text-white flex items-center gap-2"><Sparkles size={18} /> {editId ? "유리병 편지 수정" : "유리병 편지 쓰기"}</h2>
-              <button onClick={() => setCreating(false)} className="text-teal-50 hover:text-white"><X size={22} /></button>
-            </div>
-            <div className="p-5 space-y-4">
-              <div>
-                <label className="block text-sm text-stone-500 mb-1.5">🏷️ 주제 (병 겉면)</label>
-                <input value={fTheme} onChange={(e) => setFTheme(e.target.value)} placeholder="예: 내방역 맛집 / 중드 추천" maxLength={40} className="w-full px-3 py-2.5 rounded-xl border-2 border-stone-200 text-sm text-stone-800 focus:outline-none focus:border-teal-400" />
-              </div>
-              <div>
-                <label className="block text-sm text-stone-500 mb-1.5">💌 편지 내용 (공유할 항목)</label>
-                <textarea value={fItems} onChange={(e) => setFItems(e.target.value)} rows={5} placeholder={"예:\n- 쿠마카레야 (일본식 카레)\n- 미하무\n- 미국식 다이너\n\n줄바꿈으로 여러 항목을 적어보세요!"} className="w-full px-3 py-2.5 rounded-xl border-2 border-stone-200 text-sm text-stone-800 focus:outline-none focus:border-teal-400 resize-none" />
-              </div>
-
-              <div>
-                <label className="block text-sm text-stone-500 mb-2">🗂️ 주제 분류 <span className="text-stone-400">(선택)</span></label>
-                <div className="flex flex-wrap gap-2">
-                  <button onClick={() => setFCat("none")} className={`px-3 py-1.5 rounded-full text-sm border-2 transition ${fCat === "none" ? "bg-stone-700 text-white border-stone-700" : "bg-white text-stone-500 border-stone-200"}`}>분류 없음</button>
-                  {CATEGORIES.map((c) => (
-                    <button key={c.key} onClick={() => setFCat(c.key)} className={`px-3 py-1.5 rounded-full text-sm border-2 transition ${fCat === c.key ? "text-white" : "bg-white text-stone-500 border-stone-200"}`} style={fCat === c.key ? { background: c.color, borderColor: c.color } : undefined}>{c.icon} {c.label}</button>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm text-stone-500 mb-2">🎨 병 색 미리보기 <span className="text-stone-400">(분류에 따라 자동)</span></label>
-                <div className="flex items-center gap-3 bg-stone-50 rounded-xl p-3">
-                  <Bottle color={BOTTLE_COLORS[catColorIndex(fCat)]} scale={0.55} />
-                  <p className="text-sm text-stone-500">
-                    {fCat === "none" ? "분류를 고르면 그 색의 유리병이 돼요" : `'${catOf(fCat)?.label}' 유리병은 이 색이에요`}
-                  </p>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm text-stone-500 mb-1.5">✍️ 닉네임</label>
-                <input value={fNick} onChange={(e) => setFNick(e.target.value)} placeholder="본명이어도, 익명이어도 OK!" maxLength={20} className="w-full px-3 py-2.5 rounded-xl border-2 border-stone-200 text-sm text-stone-800 focus:outline-none focus:border-teal-400" />
-              </div>
-
-              <button onClick={saveBottle} disabled={!fTheme.trim() || !fItems.trim()} className="w-full bg-teal-500 hover:bg-teal-600 disabled:bg-stone-300 disabled:cursor-not-allowed active:scale-95 transition text-white py-3 rounded-2xl shadow-md text-lg">{editId ? "✏️ 수정 완료" : "🌊 해변에 띄우기"}</button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+            const cat = b.category && b.category !== "none" ? catOf(b.category) : null;
+            const col = cat ? cat.color : (BOTTLE_COLORS[b.colorIndex] || BOTTLE_COLORS[0]).dark;
+            return /*#__PURE__*/_jsx("div", {
+              className: "absolute rounded-full border border-white",
+              style: {
+                left: p.x * ms - 2.5,
+                top: p.y * ms - 2.5,
+                width: 5,
+                height: 5,
+                background: col
+              }
+            }, "mb" + b.id);
+          }), /*#__PURE__*/_jsx("div", {
+            className: "absolute border-2 border-rose-400 rounded-sm bg-rose-200/20",
+            style: {
+              left: Math.max(0, mmView.left),
+              top: Math.max(0, mmView.top),
+              width: Math.min(mmW, mmView.w),
+              height: Math.min(mmH, mmView.h)
+            }
+          })]
+        })
+      }), /*#__PURE__*/_jsxs("div", {
+        className: "absolute bottom-4 right-4 z-10 flex flex-col gap-2",
+        children: [/*#__PURE__*/_jsx("button", {
+          onClick: refreshBottles,
+          className: ctrlBtn,
+          title: "새로고침",
+          children: /*#__PURE__*/_jsx(RefreshCw, {
+            size: 18
+          })
+        }), /*#__PURE__*/_jsx("button", {
+          onClick: toggleSound,
+          className: ctrlBtn,
+          title: "파도 소리",
+          children: soundOn ? /*#__PURE__*/_jsx(Volume2, {
+            size: 18
+          }) : /*#__PURE__*/_jsx(VolumeX, {
+            size: 18
+          })
+        }), /*#__PURE__*/_jsx("button", {
+          onClick: () => setZoomAround(Math.min(maxZoom, +(zoom + 0.15).toFixed(2))),
+          className: ctrlBtn,
+          title: "확대",
+          children: /*#__PURE__*/_jsx(ZoomIn, {
+            size: 18
+          })
+        }), /*#__PURE__*/_jsx("button", {
+          onClick: () => setZoomAround(Math.max(minZoom, +(zoom - 0.15).toFixed(2))),
+          className: ctrlBtn,
+          title: "축소",
+          children: /*#__PURE__*/_jsx(ZoomOut, {
+            size: 18
+          })
+        }), /*#__PURE__*/_jsx("button", {
+          onClick: recenter,
+          className: ctrlBtn,
+          title: "가운데로",
+          children: /*#__PURE__*/_jsx(Compass, {
+            size: 18
+          })
+        })]
+      })]
+    }), /*#__PURE__*/_jsxs("button", {
+      onClick: openCreate,
+      style: {
+        bottom: "calc(2.25rem + env(safe-area-inset-bottom))"
+      },
+      className: "fixed left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 bg-teal-500 hover:bg-teal-600 active:scale-95 transition text-white px-6 py-3.5 rounded-full shadow-xl border-2 border-teal-600 text-lg",
+      children: [/*#__PURE__*/_jsx(Plus, {
+        size: 20,
+        strokeWidth: 3
+      }), " 유리병 띄우기"]
+    }), opening && openAnim && /*#__PURE__*/_jsx("div", {
+      className: "fixed inset-0 z-40 bg-sky-900/30 backdrop-blur-[2px] flex items-center justify-center",
+      children: /*#__PURE__*/_jsxs("div", {
+        className: "relative flex flex-col items-center",
+        children: [/*#__PURE__*/_jsx("div", {
+          className: "absolute left-1/2 z-10",
+          style: {
+            top: "10px",
+            animation: `${openAnim.cork} ${openAnim.dur}s ease-out forwards`
+          },
+          children: /*#__PURE__*/_jsx("div", {
+            className: "w-7 h-7 bg-amber-600 rounded-lg border-2 border-amber-700 shadow-lg"
+          })
+        }), /*#__PURE__*/_jsx("div", {
+          className: "absolute left-1/2 z-20 text-2xl text-white drop-shadow",
+          style: {
+            top: "-10px",
+            animation: `poptext ${(openAnim.dur + 0.1).toFixed(2)}s ease-out forwards`
+          },
+          children: "뽕!"
+        }), openAnim.sparkles.map((s, i) => /*#__PURE__*/_jsx("div", {
+          className: "absolute left-1/2 top-6 text-xl z-10",
+          style: {
+            "--end": s.end,
+            animation: `sparklefly ${openAnim.dur}s ease-out forwards`,
+            animationDelay: `${i * 0.04}s`
+          },
+          children: s.e
+        }, "s" + i)), openAnim.droplets.map((d, i) => /*#__PURE__*/_jsx("div", {
+          className: "absolute left-1/2 top-10 w-3 h-3 rounded-full bg-cyan-300/90 border border-cyan-100 z-10",
+          style: {
+            "--dend": d.end,
+            animation: `dropletfly ${openAnim.dur}s ease-in forwards`,
+            animationDelay: `${d.d}s`
+          }
+        }, "d" + i)), /*#__PURE__*/_jsx("div", {
+          style: {
+            animation: `bottlewiggle ${openAnim.dur}s ease-in-out`
+          },
+          children: /*#__PURE__*/_jsx(Bottle, {
+            color: BOTTLE_COLORS[opening.colorIndex] || BOTTLE_COLORS[0],
+            scale: 1.7,
+            showCork: false
+          })
+        })]
+      })
+    }), selected && /*#__PURE__*/_jsx("div", {
+      className: "fixed inset-0 z-30 bg-black/40 flex items-end sm:items-center justify-center p-0 sm:p-4",
+      onClick: () => setSelectedId(null),
+      children: /*#__PURE__*/_jsxs("div", {
+        className: "pop w-full sm:max-w-md max-h-[88vh] overflow-y-auto rounded-t-3xl sm:rounded-3xl shadow-2xl border-t-4 sm:border-4 border-amber-200",
+        style: {
+          backgroundColor: "#fffdf7"
+        },
+        onClick: e => e.stopPropagation(),
+        children: [/*#__PURE__*/_jsxs("div", {
+          className: "sticky top-0 bg-amber-700 px-5 py-3 flex items-center justify-between rounded-t-3xl sm:rounded-t-2xl",
+          children: [/*#__PURE__*/_jsxs("div", {
+            className: "flex items-center gap-2 min-w-0",
+            children: [/*#__PURE__*/_jsx("span", {
+              className: "text-lg",
+              children: selected.category && selected.category !== "none" ? catOf(selected.category)?.icon : "🍶"
+            }), /*#__PURE__*/_jsx("h2", {
+              className: "text-lg text-amber-50 truncate",
+              children: selected.theme
+            })]
+          }), /*#__PURE__*/_jsx("button", {
+            onClick: () => setSelectedId(null),
+            className: "text-amber-100 hover:text-white",
+            children: /*#__PURE__*/_jsx(X, {
+              size: 22
+            })
+          })]
+        }), /*#__PURE__*/_jsxs("div", {
+          className: "p-5",
+          children: [/*#__PURE__*/_jsxs("div", {
+            className: "flex items-center justify-between mb-3",
+            children: [/*#__PURE__*/_jsxs("div", {
+              className: "flex items-center gap-2",
+              children: [/*#__PURE__*/_jsxs("p", {
+                className: "text-sm text-amber-800",
+                children: ["✍️ ", selected.nickname]
+              }), selected.category && selected.category !== "none" && /*#__PURE__*/_jsxs("span", {
+                className: "text-[11px] text-white px-2 py-0.5 rounded-full",
+                style: {
+                  background: catOf(selected.category)?.color
+                },
+                children: [catOf(selected.category)?.icon, " ", catOf(selected.category)?.label]
+              })]
+            }), selected.ownerId === myId && /*#__PURE__*/_jsxs("div", {
+              className: "flex items-center gap-1",
+              children: [/*#__PURE__*/_jsxs("button", {
+                onClick: () => openEdit(selected),
+                className: "flex items-center gap-1 text-xs text-teal-600 bg-teal-50 hover:bg-teal-100 px-2.5 py-1 rounded-full border border-teal-200",
+                children: [/*#__PURE__*/_jsx(Pencil, {
+                  size: 12
+                }), " 수정"]
+              }), /*#__PURE__*/_jsxs("button", {
+                onClick: () => setConfirmDelete(true),
+                className: "flex items-center gap-1 text-xs text-rose-500 bg-rose-50 hover:bg-rose-100 px-2.5 py-1 rounded-full border border-rose-200",
+                children: [/*#__PURE__*/_jsx(Trash2, {
+                  size: 12
+                }), " 삭제"]
+              })]
+            })]
+          }), confirmDelete && selected.ownerId === myId && /*#__PURE__*/_jsxs("div", {
+            className: "mb-3 bg-rose-50 border border-rose-200 rounded-2xl p-3 text-center",
+            children: [/*#__PURE__*/_jsx("p", {
+              className: "text-sm text-rose-600 mb-2",
+              children: "이 유리병을 정말 떠나보낼까요? 🌊"
+            }), /*#__PURE__*/_jsxs("div", {
+              className: "flex gap-2 justify-center",
+              children: [/*#__PURE__*/_jsx("button", {
+                onClick: () => deleteBottle(selected),
+                className: "px-4 py-1.5 rounded-full bg-rose-500 text-white text-sm hover:bg-rose-600",
+                children: "삭제하기"
+              }), /*#__PURE__*/_jsx("button", {
+                onClick: () => setConfirmDelete(false),
+                className: "px-4 py-1.5 rounded-full bg-white text-stone-500 text-sm border border-stone-200",
+                children: "취소"
+              })]
+            })]
+          }), /*#__PURE__*/_jsx("div", {
+            className: "bg-amber-50/70 border border-amber-100 rounded-2xl p-4 mb-5",
+            children: /*#__PURE__*/_jsx("div", {
+              className: "whitespace-pre-wrap text-[16px] leading-8 text-stone-800",
+              children: selected.items
+            })
+          }), /*#__PURE__*/_jsx("div", {
+            className: "flex flex-wrap gap-2 mb-5",
+            children: REACTIONS.map(r => {
+              const active = !!myReactions[selected.id + ":" + r.key];
+              const count = selected.reactions && selected.reactions[r.key] || 0;
+              return /*#__PURE__*/_jsxs("button", {
+                onClick: () => toggleReaction(selected, r.key),
+                className: `flex items-center gap-1.5 px-3 py-1.5 rounded-full border-2 text-sm transition active:scale-90 ${active ? "bg-teal-100 border-teal-400 text-teal-700" : "bg-white border-amber-200 text-stone-500 hover:border-amber-300"}`,
+                children: [/*#__PURE__*/_jsx("span", {
+                  className: "text-base",
+                  children: r.emoji
+                }), /*#__PURE__*/_jsx("span", {
+                  children: count
+                })]
+              }, r.key);
+            })
+          }), /*#__PURE__*/_jsxs("div", {
+            className: "border-t-2 border-dashed border-amber-200 pt-4",
+            children: [/*#__PURE__*/_jsxs("p", {
+              className: "text-sm text-amber-800 mb-3 flex items-center gap-1",
+              children: ["💬 댓글 ", (selected.comments || []).length]
+            }), /*#__PURE__*/_jsxs("div", {
+              className: "space-y-2 mb-3",
+              children: [(selected.comments || []).length === 0 && /*#__PURE__*/_jsx("p", {
+                className: "text-xs text-stone-400 italic",
+                children: "아직 댓글이 없어요. 첫 반응을 남겨보세요!"
+              }), (selected.comments || []).map((c, i) => /*#__PURE__*/_jsxs("div", {
+                className: "bg-amber-50 rounded-2xl px-3 py-2 border border-amber-100",
+                children: [/*#__PURE__*/_jsx("p", {
+                  className: "text-[12px] text-teal-600",
+                  children: c.nickname
+                }), /*#__PURE__*/_jsx("p", {
+                  className: "text-sm text-stone-800",
+                  children: c.text
+                })]
+              }, i))]
+            }), /*#__PURE__*/_jsx("input", {
+              value: nickname,
+              onChange: e => setNickname(e.target.value),
+              placeholder: "닉네임 (비우면 익명)",
+              className: "w-full mb-2 px-3 py-2 rounded-xl border-2 border-amber-200 bg-white text-sm text-stone-800 focus:outline-none focus:border-teal-400"
+            }), /*#__PURE__*/_jsxs("div", {
+              className: "flex gap-2",
+              children: [/*#__PURE__*/_jsx("input", {
+                value: commentText,
+                onChange: e => setCommentText(e.target.value),
+                onKeyDown: e => e.key === "Enter" && addComment(selected),
+                placeholder: "따뜻한 한마디 남기기...",
+                className: "flex-1 px-3 py-2 rounded-xl border-2 border-amber-200 bg-white text-sm text-stone-800 focus:outline-none focus:border-teal-400"
+              }), /*#__PURE__*/_jsx("button", {
+                onClick: () => addComment(selected),
+                className: "bg-teal-500 hover:bg-teal-600 active:scale-90 transition text-white px-3 rounded-xl",
+                children: /*#__PURE__*/_jsx(Send, {
+                  size: 18
+                })
+              })]
+            })]
+          })]
+        })]
+      })
+    }), creating && /*#__PURE__*/_jsx("div", {
+      className: "fixed inset-0 z-50 bg-black/40 flex items-end sm:items-center justify-center p-0 sm:p-4",
+      onClick: () => setCreating(false),
+      children: /*#__PURE__*/_jsxs("div", {
+        className: "pop bg-white w-full sm:max-w-md max-h-[90vh] overflow-y-auto rounded-t-3xl sm:rounded-3xl shadow-2xl border-t-4 sm:border-4 border-teal-200",
+        onClick: e => e.stopPropagation(),
+        children: [/*#__PURE__*/_jsxs("div", {
+          className: "sticky top-0 bg-teal-500 px-5 py-3 flex items-center justify-between rounded-t-3xl sm:rounded-t-2xl",
+          children: [/*#__PURE__*/_jsxs("h2", {
+            className: "text-lg text-white flex items-center gap-2",
+            children: [/*#__PURE__*/_jsx(Sparkles, {
+              size: 18
+            }), " ", editId ? "유리병 편지 수정" : "유리병 편지 쓰기"]
+          }), /*#__PURE__*/_jsx("button", {
+            onClick: () => setCreating(false),
+            className: "text-teal-50 hover:text-white",
+            children: /*#__PURE__*/_jsx(X, {
+              size: 22
+            })
+          })]
+        }), /*#__PURE__*/_jsxs("div", {
+          className: "p-5 space-y-4",
+          children: [/*#__PURE__*/_jsxs("div", {
+            children: [/*#__PURE__*/_jsx("label", {
+              className: "block text-sm text-stone-500 mb-1.5",
+              children: "🏷️ 주제 (병 겉면)"
+            }), /*#__PURE__*/_jsx("input", {
+              value: fTheme,
+              onChange: e => setFTheme(e.target.value),
+              placeholder: "예: 내방역 맛집 / 중드 추천",
+              maxLength: 40,
+              className: "w-full px-3 py-2.5 rounded-xl border-2 border-stone-200 text-sm text-stone-800 focus:outline-none focus:border-teal-400"
+            })]
+          }), /*#__PURE__*/_jsxs("div", {
+            children: [/*#__PURE__*/_jsx("label", {
+              className: "block text-sm text-stone-500 mb-1.5",
+              children: "💌 편지 내용 (공유할 항목)"
+            }), /*#__PURE__*/_jsx("textarea", {
+              value: fItems,
+              onChange: e => setFItems(e.target.value),
+              rows: 5,
+              placeholder: "예:\n- 쿠마카레야 (일본식 카레)\n- 미하무\n- 미국식 다이너\n\n줄바꿈으로 여러 항목을 적어보세요!",
+              className: "w-full px-3 py-2.5 rounded-xl border-2 border-stone-200 text-sm text-stone-800 focus:outline-none focus:border-teal-400 resize-none"
+            })]
+          }), /*#__PURE__*/_jsxs("div", {
+            children: [/*#__PURE__*/_jsxs("label", {
+              className: "block text-sm text-stone-500 mb-2",
+              children: ["🗂️ 주제 분류 ", /*#__PURE__*/_jsx("span", {
+                className: "text-stone-400",
+                children: "(선택)"
+              })]
+            }), /*#__PURE__*/_jsxs("div", {
+              className: "flex flex-wrap gap-2",
+              children: [/*#__PURE__*/_jsx("button", {
+                onClick: () => setFCat("none"),
+                className: `px-3 py-1.5 rounded-full text-sm border-2 transition ${fCat === "none" ? "bg-stone-700 text-white border-stone-700" : "bg-white text-stone-500 border-stone-200"}`,
+                children: "분류 없음"
+              }), CATEGORIES.map(c => /*#__PURE__*/_jsxs("button", {
+                onClick: () => setFCat(c.key),
+                className: `px-3 py-1.5 rounded-full text-sm border-2 transition ${fCat === c.key ? "text-white" : "bg-white text-stone-500 border-stone-200"}`,
+                style: fCat === c.key ? {
+                  background: c.color,
+                  borderColor: c.color
+                } : undefined,
+                children: [c.icon, " ", c.label]
+              }, c.key))]
+            })]
+          }), /*#__PURE__*/_jsxs("div", {
+            children: [/*#__PURE__*/_jsxs("label", {
+              className: "block text-sm text-stone-500 mb-2",
+              children: ["🎨 병 색 미리보기 ", /*#__PURE__*/_jsx("span", {
+                className: "text-stone-400",
+                children: "(분류에 따라 자동)"
+              })]
+            }), /*#__PURE__*/_jsxs("div", {
+              className: "flex items-center gap-3 bg-stone-50 rounded-xl p-3",
+              children: [/*#__PURE__*/_jsx(Bottle, {
+                color: BOTTLE_COLORS[catColorIndex(fCat)],
+                scale: 0.55
+              }), /*#__PURE__*/_jsx("p", {
+                className: "text-sm text-stone-500",
+                children: fCat === "none" ? "분류를 고르면 그 색의 유리병이 돼요" : `'${catOf(fCat)?.label}' 유리병은 이 색이에요`
+              })]
+            })]
+          }), /*#__PURE__*/_jsxs("div", {
+            children: [/*#__PURE__*/_jsx("label", {
+              className: "block text-sm text-stone-500 mb-1.5",
+              children: "✍️ 닉네임"
+            }), /*#__PURE__*/_jsx("input", {
+              value: fNick,
+              onChange: e => setFNick(e.target.value),
+              placeholder: "본명이어도, 익명이어도 OK!",
+              maxLength: 20,
+              className: "w-full px-3 py-2.5 rounded-xl border-2 border-stone-200 text-sm text-stone-800 focus:outline-none focus:border-teal-400"
+            })]
+          }), /*#__PURE__*/_jsx("button", {
+            onClick: saveBottle,
+            disabled: !fTheme.trim() || !fItems.trim(),
+            className: "w-full bg-teal-500 hover:bg-teal-600 disabled:bg-stone-300 disabled:cursor-not-allowed active:scale-95 transition text-white py-3 rounded-2xl shadow-md text-lg",
+            children: editId ? "✏️ 수정 완료" : "🌊 해변에 띄우기"
+          })]
+        })]
+      })
+    })]
+  });
 }
+ReactDOM.createRoot(document.getElementById("root")).render(/*#__PURE__*/_jsx(App, {}));
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+})();
 </script>
 </body>
 </html>
