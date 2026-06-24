@@ -1630,13 +1630,14 @@ function App() {
         style: {
           paddingTop: "30vh"
         },
-        children: /*#__PURE__*/_jsx("div", {
+        children: /*#__PURE__*/_jsxs("div", {
           className: "intro-walk-box bg-white/90 text-teal-800 text-base sm:text-2xl font-bold px-6 py-3.5 sm:px-9 sm:py-5 rounded-full shadow-xl border-2 border-white text-center",
           style: {
             maxWidth: "88vw",
+            wordBreak: "keep-all",
             animation: "fadeup .6s ease both"
           },
-          children: "🚶 해변을 거니는 중… 저 멀리 무언가 떠밀려 와요 🌊"
+          children: ["🚶 해변을 거니는 중…", /*#__PURE__*/_jsx("br", { className: "sm:hidden" }), " 저 멀리 무언가 떠밀려 와요 🌊"]
         })
       }), introStep === "bottle" && /*#__PURE__*/_jsxs("div", {
         className: "absolute inset-0 flex flex-col items-center justify-center",
