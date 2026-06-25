@@ -1620,7 +1620,14 @@ function App() {
       style: {
         zIndex: 70
       },
-      children: [/*#__PURE__*/_jsx(IntroBeach, {}), /*#__PURE__*/_jsx("div", {
+      children: [/*#__PURE__*/_jsx("button", {
+        onClick: () => setIntro(false),
+        className: "absolute top-4 right-4 z-50 bg-white/85 hover:bg-white text-teal-700 text-sm font-bold px-4 py-2 rounded-full shadow-lg border border-teal-100 active:scale-95 transition",
+        style: {
+          animation: "fadeup .6s ease both"
+        },
+        children: "건너뛰기 ⏭"
+      }), /*#__PURE__*/_jsx(IntroBeach, {}), /*#__PURE__*/_jsx("div", {
         className: "absolute inset-0 transition-all duration-700",
         style: {
           background: introStep === "letter" ? "rgba(10,40,60,0.58)" : introStep === "pop" ? "rgba(10,40,60,0.22)" : "rgba(10,40,60,0)"
