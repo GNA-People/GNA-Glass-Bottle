@@ -676,28 +676,15 @@ function Bottle({
       rx: "3",
       fill: "#fdf6e3",
       stroke: "#e8d9b0",
-      strokeWidth: "1"
-    }), /*#__PURE__*/_jsx("line", {
-      x1: "31",
-      y1: "80",
-      x2: "39",
-      y2: "80",
-      stroke: "#d4c08a",
-      strokeWidth: "1"
-    }), /*#__PURE__*/_jsx("line", {
-      x1: "31",
-      y1: "85",
-      x2: "39",
-      y2: "85",
-      stroke: "#d4c08a",
-      strokeWidth: "1"
-    }), /*#__PURE__*/_jsx("line", {
-      x1: "31",
-      y1: "90",
-      x2: "37",
-      y2: "90",
-      stroke: "#d4c08a",
-      strokeWidth: "1"
+      strokeWidth: "1.5"
+    }), /*#__PURE__*/_jsx("path", {
+      d: "M30.5 84 L37 88.5 L30.5 93 Z",
+      fill: "#4488FF"
+    }), /*#__PURE__*/_jsx("circle", {
+      cx: "37.5",
+      cy: "99",
+      r: "3.2",
+      fill: "#E0115F"
     }), /*#__PURE__*/_jsx("ellipse", {
       cx: "27",
       cy: "60",
@@ -1689,7 +1676,7 @@ function App() {
                 filter: "drop-shadow(0 10px 12px rgba(0,0,0,0.35))"
               },
               children: /*#__PURE__*/_jsx(Bottle, {
-                color: BOTTLE_COLORS[0],
+                color: BOTTLE_COLORS[1],
                 scale: 1.7
               })
             })]
@@ -1749,7 +1736,7 @@ function App() {
               animation: `bottlewiggle ${ANIM_PRESETS[1].dur}s ease-in-out`
             },
             children: /*#__PURE__*/_jsx(Bottle, {
-              color: BOTTLE_COLORS[0],
+              color: BOTTLE_COLORS[1],
               scale: 1.9,
               showCork: false
             })
