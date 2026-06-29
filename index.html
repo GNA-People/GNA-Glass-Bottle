@@ -254,6 +254,10 @@ const BOTTLE_COLORS = [{
   name: "허니",
   body: "#f5d9a0",
   dark: "#e0bc72"
+}, {
+  name: "먹색",
+  body: "#9aa0a6",
+  dark: "#5f6368"
 }];
 const CATEGORIES = [{
   key: "content",
@@ -293,7 +297,7 @@ const CATEGORIES = [{
   colorIndex: 5
 }];
 function catColorIndex(key) {
-  if (key === "none" || !key) return 4;
+  if (key === "none" || !key) return 6;
   const c = CATEGORIES.find(x => x.key === key);
   return c ? c.colorIndex : 4;
 }
