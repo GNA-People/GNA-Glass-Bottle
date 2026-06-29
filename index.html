@@ -1624,6 +1624,9 @@ function App() {
         .bob { animation: bob 4s ease-in-out infinite; }
         .pop { animation: pop .25s ease-out; }
         .nobar::-webkit-scrollbar{ display:none }
+        @keyframes floatbtn { 0%,100%{ transform: translateX(-50%) translateY(0) } 50%{ transform: translateX(-50%) translateY(-7px) } }
+        @keyframes glowpulse { 0%,100%{ box-shadow: 0 10px 25px rgba(13,148,136,0.45) } 50%{ box-shadow: 0 14px 34px rgba(13,148,136,0.7) } }
+        .float-cta { animation: floatbtn 2.6s ease-in-out infinite, glowpulse 2.6s ease-in-out infinite; }
       `
     }), intro && /*#__PURE__*/_jsxs("div", {
       className: "fixed inset-0 overflow-hidden",
@@ -2277,9 +2280,9 @@ function App() {
       style: {
         bottom: "calc(2.25rem + env(safe-area-inset-bottom))"
       },
-      className: "fixed left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 bg-teal-500 hover:bg-teal-600 active:scale-95 transition text-white px-6 py-3.5 rounded-full shadow-xl border-2 border-teal-600 text-lg",
+      className: "float-cta fixed left-1/2 z-20 flex items-center gap-2.5 bg-teal-500 hover:bg-teal-600 active:scale-95 transition-colors text-white px-8 py-4 sm:px-10 sm:py-5 rounded-full border-2 border-teal-600 text-xl sm:text-2xl font-bold",
       children: [/*#__PURE__*/_jsx(Plus, {
-        size: 20,
+        size: 26,
         strokeWidth: 3
       }), " 유리병 띄우기"]
     }), opening && openAnim && /*#__PURE__*/_jsx("div", {
